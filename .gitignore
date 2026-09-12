@@ -1,0 +1,50 @@
+# Environment and secrets (repo root or tooling)
+.env
+.env.*
+!.env.example
+!.env*.example
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+*~
+
+# Editors / IDEs
+.idea/
+*.swp
+*.swo
+.project
+.classpath
+.settings/
+*.sublime-*
+
+# Logs and debug
+*.log
+logs/
+
+# Optional caches (root-level tools)
+.turbo
+.cache/
+
+# Local / scratch
+*.local
+tmp/
+temp/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+*.egg-info/
+dist/
+.pytest_cache/
+
+# Firebase
+serviceAccountKey.json
+serviceAccountKey*.json

@@ -1,0 +1,7 @@
+fastapi[standard]>=0.115.0
+firebase-admin>=6.5.0
+pydantic[email]>=2.0.0
+python-dotenv>=1.0.0
+python-multipart>=0.0.9
+aiofiles>=23.0.0
+cffi>=1.17.0
