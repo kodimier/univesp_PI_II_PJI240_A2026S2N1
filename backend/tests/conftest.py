@@ -1,5 +1,8 @@
+import os
 import sys
 from unittest.mock import MagicMock
+
+os.environ.setdefault("WHATSAPP_VERIFY_TOKEN", "test-verify")
 
 _firebase_stub = MagicMock()
 _firebase_stub._apps = ["stub"]

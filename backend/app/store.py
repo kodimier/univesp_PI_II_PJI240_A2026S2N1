@@ -43,3 +43,13 @@ def update_doc(
     body["updated_at"] = _now()
     get_db().collection(collection).document(doc_id).set(body, merge=True)
     return {"id": doc_id, **body}
+
+
+def set_doc(collection: str, doc_id: str, payload: dict[str, Any]) -> dict[str, Any]:
+    body = dict(payload)
+    get_db().collection(collection).document(doc_id).set(body, merge=True)
+    return {"id": doc_id, **body}
+
+
+def find_docs(collection: str, field: str, value: Any) -> list[dict[str, Any]]:
+    return [doc for doc in list_docs(collection) if doc.get(field) == value]
