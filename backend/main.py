@@ -4,14 +4,16 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from dotenv import load_dotenv
-from app.routers import contact, services, assets
+from app.routers import assets, contact, leads, services
 
 load_dotenv()
 
 app = FastAPI(
     title="PG AVCB API",
-    description="Backend da landing page PG AVCB Engenharia contra Incêndio",
-    version="0.1.0",
+    description=(
+        "Backend da landing page e do CRM da PG AVCB Engenharia contra Incêndio"
+    ),
+    version="0.2.0",
 )
 
 _origins = os.getenv("CORS_ORIGINS", "http://localhost:3000").split(",")
@@ -30,6 +32,7 @@ app.mount("/static", StaticFiles(directory=_public_dir), name="static")
 app.include_router(contact.router, prefix="/api")
 app.include_router(services.router, prefix="/api")
 app.include_router(assets.router, prefix="/api")
+app.include_router(leads.router, prefix="/api")
 
 
 @app.get("/api/health", tags=["Health"])

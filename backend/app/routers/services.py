@@ -1,4 +1,5 @@
 from fastapi import APIRouter
+from app.collections import SERVICES
 from app.models.service import Service
 from app.firebase import get_db
 from typing import List
@@ -49,7 +50,7 @@ _DEFAULT_SERVICES: List[Service] = [
 def list_services():
     try:
         db = get_db()
-        docs = list(db.collection("services").stream())
+        docs = list(db.collection(SERVICES).stream())
         if docs:
             return [Service(id=doc.id, **doc.to_dict()) for doc in docs]
     except Exception:

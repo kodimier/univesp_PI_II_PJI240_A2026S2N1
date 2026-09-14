@@ -1,5 +1,6 @@
 from datetime import datetime, timezone
 from fastapi import APIRouter, HTTPException
+from app.collections import CONTACTS
 from app.models.contact import ContactForm, ContactResponse
 from app.firebase import get_db
 
@@ -10,7 +11,7 @@ router = APIRouter(tags=["Contato"])
 def submit_contact(form: ContactForm):
     try:
         db = get_db()
-        doc_ref = db.collection("contacts").document()
+        doc_ref = db.collection(CONTACTS).document()
         doc_ref.set({
             **form.model_dump(),
             "created_at": datetime.now(timezone.utc).isoformat(),
