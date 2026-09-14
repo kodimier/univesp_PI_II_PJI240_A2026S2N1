@@ -1,10 +1,14 @@
-from fastapi import APIRouter, HTTPException, Query
+from fastapi import APIRouter, Depends, HTTPException, Query
 
+from app.auth import require_crm_token
 from app.brasilapi import BrasilAPIError, lookup_company
 from app.cnpj_utils import parse_cnpj
 from app.models.company import Company
 
-router = APIRouter(tags=["CRM — CNPJ"])
+router = APIRouter(
+    tags=["CRM — CNPJ"],
+    dependencies=[Depends(require_crm_token)],
+)
 
 
 @router.get("/cnpj/{cnpj}", response_model=Company)

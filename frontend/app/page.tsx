@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { getServices, getAssets, assetsByCategory } from "@/lib/api";
+import { ContactForm } from "./contact-form";
 
 const nav = [
   { href: "#contato", label: "Contato" },
@@ -122,12 +123,15 @@ export default async function Home() {
         </section>
 
         <section id="contato" className="px-6 py-16">
-          <div className="mx-auto max-w-2xl text-center">
-            <h2 className="text-xl font-semibold text-zinc-900">Contato</h2>
-            <p className="mt-2 text-zinc-600">
-              Formulário e demais blocos podem ser adicionados aqui conforme o
-              layout em <span className="font-medium">reference.html</span>.
+          <div className="mx-auto max-w-2xl">
+            <h2 className="text-center text-xl font-semibold text-zinc-900">
+              Contato
+            </h2>
+            <p className="mt-2 text-center text-zinc-600">
+              Envie uma mensagem. O pedido entra no CRM da PGAVCB para a equipe
+              acompanhar o atendimento.
             </p>
+            <ContactForm />
           </div>
         </section>
       </main>

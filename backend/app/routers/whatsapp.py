@@ -1,9 +1,10 @@
 import os
 from typing import List
 
-from fastapi import APIRouter, HTTPException, Query, Request
+from fastapi import APIRouter, Depends, HTTPException, Query, Request
 from fastapi.responses import PlainTextResponse
 
+from app.auth import require_crm_token
 from app.models.whatsapp import (
     ClaimConversation,
     ConversationOut,
@@ -23,6 +24,7 @@ from app.whatsapp import (
 )
 
 router = APIRouter(tags=["CRM — WhatsApp"])
+_crm = Depends(require_crm_token)
 
 
 @router.get("/whatsapp/webhook")
@@ -52,7 +54,7 @@ async def receive_webhook(request: Request):
     return {"status": "ok", "processed": processed}
 
 
-@router.get("/whatsapp/conversations", response_model=List[ConversationOut])
+@router.get("/whatsapp/conversations", response_model=List[ConversationOut], dependencies=[_crm])
 def get_queue():
     return [ConversationOut.model_validate(doc) for doc in list_queue()]
 
@@ -60,6 +62,7 @@ def get_queue():
 @router.get(
     "/whatsapp/conversations/{conversation_id}",
     response_model=ConversationOut,
+    dependencies=[_crm],
 )
 def get_conversation(conversation_id: str):
     doc = get_doc(CONVERSATIONS, conversation_id)
@@ -71,6 +74,7 @@ def get_conversation(conversation_id: str):
 @router.get(
     "/whatsapp/conversations/{conversation_id}/messages",
     response_model=List[MessageOut],
+    dependencies=[_crm],
 )
 def get_conversation_messages(conversation_id: str):
     if get_doc(CONVERSATIONS, conversation_id) is None:
@@ -81,6 +85,7 @@ def get_conversation_messages(conversation_id: str):
 @router.patch(
     "/whatsapp/conversations/{conversation_id}/claim",
     response_model=ConversationOut,
+    dependencies=[_crm],
 )
 def claim(conversation_id: str, payload: ClaimConversation):
     doc = claim_conversation(conversation_id, payload.attendant_id)
@@ -92,6 +97,7 @@ def claim(conversation_id: str, payload: ClaimConversation):
 @router.patch(
     "/whatsapp/conversations/{conversation_id}/close",
     response_model=ConversationOut,
+    dependencies=[_crm],
 )
 def close(conversation_id: str):
     doc = close_conversation(conversation_id)
@@ -104,6 +110,7 @@ def close(conversation_id: str):
     "/whatsapp/conversations/{conversation_id}/messages",
     response_model=MessageOut,
     status_code=201,
+    dependencies=[_crm],
 )
 def reply(conversation_id: str, payload: OutboundMessage):
     try:

@@ -64,3 +64,17 @@ def test_invalid_cnpj_returns_422(client):
     payload = {**LEAD, "cnpj": "123"}
     r = client.post("/api/leads", json=payload)
     assert r.status_code == 422
+
+
+def test_filter_leads_by_status_and_origin(client):
+    client.post("/api/leads", json=LEAD)
+    whatsapp = {**LEAD, "name": "Lead WhatsApp", "origin": "whatsapp", "email": "wa@pgavcb.com.br"}
+    created = client.post("/api/leads", json=whatsapp).json()
+    client.patch(f"/api/leads/{created['id']}/status", json={"status": "convertido"})
+
+    landing = client.get("/api/leads", params={"origin": "landing"}).json()
+    assert all(item["origin"] == "landing" for item in landing)
+    assert len(landing) >= 1
+
+    converted = client.get("/api/leads", params={"status": "convertido"}).json()
+    assert converted[0]["id"] == created["id"]

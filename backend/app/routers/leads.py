@@ -1,12 +1,16 @@
-from typing import List
+from typing import List, Optional
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Query
 
+from app.auth import require_crm_token
 from app.collections import LEADS
-from app.models.lead import Lead, LeadCreate, LeadStatusUpdate, LeadUpdate
+from app.models.lead import Lead, LeadCreate, LeadOrigin, LeadStatus, LeadStatusUpdate, LeadUpdate
 from app.store import create_doc, get_doc, list_docs, update_doc
 
-router = APIRouter(tags=["CRM — Leads"])
+router = APIRouter(
+    tags=["CRM — Leads"],
+    dependencies=[Depends(require_crm_token)],
+)
 
 
 def _to_lead(doc: dict) -> Lead:
@@ -14,8 +18,17 @@ def _to_lead(doc: dict) -> Lead:
 
 
 @router.get("/leads", response_model=List[Lead])
-def list_leads():
-    return [_to_lead(doc) for doc in list_docs(LEADS)]
+def list_leads(
+    status: Optional[LeadStatus] = Query(None),
+    origin: Optional[LeadOrigin] = Query(None),
+):
+    items = [_to_lead(doc) for doc in list_docs(LEADS)]
+    if status is not None:
+        items = [item for item in items if item.status == status]
+    if origin is not None:
+        items = [item for item in items if item.origin == origin]
+    items.sort(key=lambda item: item.created_at, reverse=True)
+    return items
 
 
 @router.get("/leads/{lead_id}", response_model=Lead)
