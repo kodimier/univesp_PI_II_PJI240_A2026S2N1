@@ -11,7 +11,7 @@ Victor Hugo Ferreira Paschoal
 
 **Implementação de Módulo CRM e Automação de Leads com Next.js e Firebase para a empresa PGAVCB**
 
-Itanhaém/Peruíbe - SP
+Itanhaém / Peruíbe - SP
 2026
 
 ---
@@ -28,11 +28,11 @@ Itanhaém / Peruíbe - SP
 ---
 
 KUMAYAMA, Bruna Tavares; OLIVEIRA, Bruno Pinheiro de; GONÇALVES, Celso Albiquerque; BARBOSA, Fernando Lima; SHIMADA, Leandro Yoshio; MICHELS, Nelson T; SANTOS, Paulo Fellipe Proença dos; PASCHOAL, Victor Hugo Ferreira.
-Implementação de Módulo CRM e Automação de Leads com Next.js e Firebase para a empresa PGAVCB Título do trabalho. Relatório Técnico-Científico. Ciência de Dados, Engenharia de Computação e Tecnologia da Informação Universidade Virtual do Estado de São Paulo. Tutor: Amanda Silva do Carmo. Polo Itanhaém e Peruíbe, 2026.
+Implementação de Módulo CRM e Automação de Leads com Next.js e Firebase para a empresa PGAVCB. Relatório Técnico-Científico. Ciência de Dados, Engenharia de Computação e Tecnologia da Informação - Universidade Virtual do Estado de São Paulo. Tutor: Amanda Silva do Carmo. Polo Itanhaém e Peruíbe, 2026.
 
 ## RESUMO
 
-O presente trabalho documenta o desenvolvimento parcial de uma solução computacional evolutiva voltada à empresa PG AVCB, consultoria especializada em Engenharia de Segurança Contra Incêndios sediada no litoral sul paulista. A pesquisa origina-se do descompasso operacional ocasionado pelo aumento de demandas após o primeiro ciclo do projeto, resultando em sobrecarga na triagem de contatos via WhatsApp, ausência de compartilhamento do atendimento entre múltiplos operadores e lentidão no cadastramento manual de pessoas jurídicas e condomínios. O objetivo central compreende o desenvolvimento e o acoplamento de um módulo de CRM (Customer Relationship Management) acessível ao painel administrativo previamente construído, incorporando consumo automatizado de dados cadastrais via BrasilAPI, diretrizes de acessibilidade na web (WCAG/Lighthouse), suíte de testes de software e persistência em nuvem com Firebase. A metodologia estrutura-se nos preceitos do Design Thinking, perpassando as etapas de imersão, ideação e prototipagem contínua. Os resultados parciais comprovam a viabilidade estrutural do fluxo arquitetural concebido: a extensão dos esquemas do Firebase Firestore para suportar estágios de atendimento, a integração de rotas assíncronas no framework Next.js para consumo de APIs públicas e a aplicação de diretrizes de contraste e navegação por teclado. O versionamento colaborativo sob o GitHub e o emprego de testes automatizados garantem a confiabilidade e estabilidade necessárias para entregar uma ferramenta inclusiva e de alto rendimento corporativo.
+Este O presente trabalho documenta o desenvolvimento parcial de uma solução computacional evolutiva voltada à empresa PG AVCB, consultoria especializada em Engenharia de Segurança Contra Incêndios sediada no litoral sul paulista. A pesquisa origina-se do descompasso operacional ocasionado pelo aumento de demandas após o primeiro ciclo do projeto, resultando em sobrecarga na triagem de contatos via WhatsApp, ausência de compartilhamento do atendimento entre múltiplos operadores e lentidão no cadastramento manual de pessoas jurídicas e condomínios. O objetivo central compreende o desenvolvimento e o acoplamento de um módulo de CRM (Customer Relationship Management) acessível ao painel administrativo previamente construído, incorporando consumo automatizado de dados cadastrais via BrasilAPI, diretrizes de acessibilidade na web (WCAG/Lighthouse), suíte de testes de software e persistência em nuvem com Firebase. A metodologia estrutura-se nos preceitos do Design Thinking, perpassando as etapas de imersão, ideação e prototipagem contínua. Os resultados parciais comprovam a viabilidade estrutural do fluxo arquitetural concebido: a extensão dos esquemas do Firebase Firestore para suportar estágios de atendimento, a integração de rotas assíncronas no framework Next.js para consumo de APIs públicas e a aplicação de diretrizes de contraste e navegação por teclado. O versionamento colaborativo sob o GitHub e o emprego de testes automatizados garantem a confiabilidade e estabilidade necessárias para entregar uma ferramenta inclusiva e de alto rendimento corporativo.
 
 **PALAVRAS-CHAVE:** PG AVCB; CRM; Automação de Leads; BrasilAPI; Acessibilidade Web; Firebase; Next.js
 
@@ -114,11 +114,53 @@ A construção de um painel de gestão de leads demanda interfaces reativas com 
 
 A utilização de ecossistemas baseados em Next.js e React viabiliza o desenvolvimento de aplicações de alta performance por meio de técnicas de renderização híbrida e manipulação eficiente, assegurando respostas instantâneas às ações dos operadores.
 
+O Next.js configura-se como um framework de desenvolvimento web construído sobre a biblioteca React e a linguagem JavaScript, projetado para otimizar o roteamento de páginas, a divisão de código e os modelos de renderização no servidor. No contexto evolutivo do Projeto Integrador II, a preservação e expansão desse ecossistema justificam-se pela necessidade de reaproveitamento da base tecnológica estabelecida no ciclo anterior (Projeto Integrador I). Ao manter o mesmo arcabouço para a landing page institucional e para o novo módulo de CRM, evita-se a reescrita de código, assegura-se a consistência da identidade visual e consolida-se um ambiente de roteamento unificado, alinhando o artefato às diretrizes formativas da UNIVESP para aplicações web modernas baseadas em componentes desacoplados e hospedagem em nuvem.
+
+A operacionalização do framework estrutura-se em rotas dinâmicas e isolamento de responsabilidades:
+* **Unificação da Camada de Apresentação:** Enquanto as rotas públicas mantêm a exposição dos serviços e o formulário de captação de clientes, as rotas administrativas comportam as interfaces internas de triagem de contatos, funil de leads e consulta cadastral de empresas, restritas ao uso dos colaboradores da PG AVCB.
+* **Desacoplamento e Segurança Arquitetural:** A comunicação entre o front-end e os serviços de retaguarda dá-se por meio do consumo assíncrono de APIs RESTful estruturadas em FastAPI, parametrizadas por variáveis de ambiente. Esse arranjo impede a exposição indevida de regras de negócio, chaves de autenticação ou lógicas de banco de dados diretamente no navegador do cliente.
+
+Sob a perspectiva da engenharia de software e dos requisitos de usabilidade, a arquitetura adotada viabiliza a centralização dos custos de implantação e manutenção em um único ecossistema computacional. A organização modular das páginas favorece a conformidade com as diretrizes de acessibilidade digital (WCAG 2.1), uma vez que permite delimitar marcações semânticas precisas, controles de foco de teclado e rotas limpas para cada fluxo operacional do CRM.
+
+Para a rotina corporativa da PGAVCB, a solução converte o sítio institucional em um canal dinâmico de conversão e gestão de relacionamento. Os operadores passam a ter acesso concorrente ao sistema administrativo a partir de múltiplos dispositivos via navegador web, mitigando a pulverização de atendimentos no WhatsApp, agilizando a emissão de laudos de AVCB/CLCB e conferindo rastreabilidade técnica a cada processo comercial.
+
 No que tange à infraestrutura de banco de dados e retaguarda, adota-se o Google Firebase Firestore sob o modelo de Backend as a Service (BaaS). A literatura especializada destaca os benefícios dessa arquitetura distribuída:
 
 > O uso de componentes de software de prateleira e serviços de computação em nuvem permite que a equipe de projeto foque em requisitos de alto nível, acelerando a entrega de valor ao usuário final (PRESSMAN; MAXIM, 2021).
 
-#### 2.3.3 INTEGRAÇÃO DE APIS RESTFUL E AUTOMAÇÃO DE DADOS CADASTRAIS (BRASILAPI)
+O Google Firebase configura-se como um ecossistema abrangente de computação em nuvem estruturado sob o modelo Backend as a Service (BaaS), mantido e operado pela Google. No escopo do Projeto Integrador II, a plataforma é empregada prioritariamente por meio do seu serviço de banco de dados NoSQL orientado a documentos, além de prover a infraestrutura necessária para gerenciamento de sessões e autenticação segura dos operadores do painel administrativo. Esse ambiente gerencia o armazenamento de dados fora do dispositivo local em servidores distribuídos e altamente escaláveis da infraestrutura Google Cloud, eliminando a sobrecarga operacional de provisionar, configurar e manter servidores dedicados de bancos relacionais locais pela equipe.
+
+A incorporação da plataforma Google Firebase atende com precisão ao diagnóstico operacional proposto no atual projeto. O modelo anterior, dependente do recebimento de mensagens fragmentadas em aparelhos telefônicos individuais, gerava extravio de históricos comerciais, desorganização no funil de atendimento e impossibilidade de atuação concorrente por mais de um atendente. O banco NoSQL documental do ecossistema Google Firebase adapta-se de forma nativa a esse cenário: registros de clientes (compostos por dados fiscais, histórico de mensagens e evolução de propostas técnicas) são estruturados em documentos e coleções semi esquematizadas, garantindo acesso seguro, centralizado e em tempo real a partir de qualquer navegador web corporativo. A comunicação com o banco de dados do Google Firebase é intermediada pela camada de serviços em FastAPI, utilizando a biblioteca oficial da Google.
+
+Em conformidade com as boas práticas de segurança da informação, a chave de credenciais de serviço da Google (`serviceAccountKey.json`) jamais é inserida no controle de versões do repositório GitHub. O acesso aos recursos em nuvem é configurado via variáveis de ambiente restritas ao ambiente de execução do servidor. Destacam-se na adoção do Firebase:
+
+* **Segurança por Camadas e Desacoplamento:** O cliente web (navegador do atendente) não possui chaves privilegiadas da plataforma Google; todas as leituras e escritas críticas são validadas pela API intermediária antes da persistência no banco da Google.
+* **Centralização de Estado:** Tanto a landing page quanto o painel de CRM sincronizam suas leituras em um único repositório em nuvem, superando controles dispersos em planilhas ou blocos de anotações.
+* **Auditabilidade e Pipeline de Testes:** Para garantir a independência dos testes e viabilizar a integração contínua no GitHub, o acesso ao banco da Google Firebase é abstraído por meio de rotinas simuladas (mocks), permitindo que os scripts de teste (como Jest e Pytest) sejam executados em cada commit sem necessidade de conexão real aos servidores de produção da Google.
+
+A plataforma Google Firebase oferta solução para perda de oportunidades comerciais ao transformar conversas isoladas em registros auditáveis. A gestão da empresa PG AVCB ganha autonomia para acompanhar a esteira de atendimento em tempo real, desde o primeiro contato do cliente até a tramitação conclusiva dos laudos junto ao Corpo de Bombeiros.
+
+#### 2.3.3 CAMADA DE SERVIÇOS BACKEND COM FASTAPI
+
+O FastAPI configura-se como um framework assíncrono em linguagem Python projetado para a construção de interfaces de programação de aplicações (APIs) de alto desempenho fundamentadas nos padrões RESTful e no protocolo HTTP. A ferramenta destaca-se pelo suporte nativo à tipagem estática, documentação interativa automatizada e serialização rigorosa de dados de entrada e saída. No projeto em desenvolvimento, o FastAPI atua como a camada intermediária de retaguarda (backend), operando como a ponte de comunicação e isolamento entre a interface de usuário (Next.js), o banco de dados em nuvem (Google Firebase), o serviço de validação cadastral (BrasilAPI) e a integração de mensagens instantâneas do WhatsApp.
+
+Inicialmente, destacamos a utilização do framework Next.js na apresentação e o Google Firebase na persistência. Entretanto, a inserção de uma camada de API dedicada responde a exigências de segurança da informação e governança de software. A execução direta de lógicas críticas no navegador do usuário representaria riscos graves à segurança corporativa da PG AVCB, tais como a exposição pública de chaves de serviço administrativas da Google, tokens de acesso à API do WhatsApp e regras confidenciais de negócio.
+
+A manutenção do ecossistema Python com FastAPI, herdado da infraestrutura consolidada no ciclo anterior (Projeto Integrador I - Landing Page com Painel Administrativo para a Empresa PG AVCB), apresenta vantagens estratégicas determinantes:
+
+* **Reaproveitamento de Ativos de Software:** Preserva e expande as rotas já homologadas de verificação de integridade do sistema (health check), catálogo de serviços técnicos e captura de formulários de contato.
+* **Qualidade e Testabilidade:** Facilita a estruturação de rotinas de testes automatizados com o framework Pytest, atendendo rigorosamente aos critérios de validação e controle de qualidade via GitHub.
+* **Isolamento de Responsabilidades:** Permite que a camada em Next.js concentre-se nas rotinas de acessibilidade visual, usabilidade e renderização reativa do painel administrativo, enquanto o processamento das regras de negócio permanece centralizado no servidor. O FastAPI não concorre nem substitui o Next.js ou o Google Firebase, mas complementa e orquestra a interoperabilidade entre ambos.
+
+A implementação das rotas no backend estrutura-se para assegurar tráfego assíncrono, estruturado e protegido:
+
+* **Exposição de Endpoints RESTful:** Rotas parametrizadas e consumidas pela interface Next.js por meio da variável de ambiente `NEXT_PUBLIC_API_URL`.
+* **Persistência Controlada no Firestore:** Intermediação das operações de leitura e gravação no banco NoSQL do Google Firebase por intermédio de biblioteca, garantindo que nenhuma transação seja efetuada sem validação prévia de privilégios.
+* **Consumo de Serviços Públicos Externos:** Integração de cliente HTTP assíncrono para requisições junto à BrasilAPI, processando números de CNPJ informados e estruturando os dados societários para autopreenchimento imediato no cadastro de clientes.
+
+A opção pela utilização pela camada FastAPI emancipa a infraestrutura tecnológica da PG AVCB. A captação de clientes deixa de ser uma mera vitrine estática e converte-se em um fluxo transacional robusto, no qual solicitações de propostas e dados de vistoria técnica são processados de forma estável, segura e simultânea para múltiplos colaboradores. Adicionalmente, a equipe de desenvolvimento de interface obtém liberdade para evoluir e refinar os componentes visuais do CRM com conformidade de acessibilidade (WCAG 2.1) sem a necessidade de reescrever chamadas a bancos ou serviços externos a cada nova tela concebida.
+
+#### 2.3.4 INTEGRAÇÃO DE APIS RESTFUL E AUTOMAÇÃO DE DADOS CADASTRAIS (BRASILAPI)
 
 A eficiência em sistemas modernos assenta-se na capacidade de interoperabilidade por meio de serviços padronizados. Conforme Masse (2012), as APIs RESTful estabelecem interfaces padronizadas orientadas a recursos que operam sobre os métodos e protocolos da web, permitindo que aplicações distintas troquem informações de forma segura e desacoplada em formato JSON.
 
@@ -126,7 +168,84 @@ A eficiência em sistemas modernos assenta-se na capacidade de interoperabilidad
 
 A incorporação da BrasilAPI ao ecossistema do CRM da PGAVCB atua como mecanismo de automação cadastral. Ao fornecer pontes diretas com bases oficiais públicas, a ferramenta permite que a inserção do número de CNPJ de uma entidade solicitante recupere instantaneamente razão social, nome fantasia, endereço completo e situação cadastral, mitigando a morosidade e reduzindo a taxa de inconsistências no banco de dados.
 
-#### 2.3.4 ACESSIBILIDADE DIGITAL (WCAG 2.1) E ENGENHARIA DA QUALIDADE DE SOFTWARE
+A BrasilAPI constitui uma plataforma pública e colaborativa de interfaces de programação de aplicações (APIs) voltada à integração centralizada de bases de dados abertos governamentais e corporativos no território nacional. No escopo do Projeto Integrador II - Implementação de Módulo CRM e Automação de Leads com Next.js e Firebase para a empresa PGAVCB, em desenvolvimento, o serviço é consumido para a validação e recuperação estruturada de informações societárias de pessoas jurídicas a partir do número do Cadastro Nacional da Pessoa Jurídica (CNPJ). A consulta retorna dados cadastrais normalizados em formato JSON, abrangendo razão social, nome fantasia, logradouro completo e situação cadastral perante os órgãos reguladores.
+
+A atividade da PGAVCB é voltada ao atendimento corporativo e comercial, com ênfase na emissão e renovação de laudos de AVCB e CLCB para condomínios e estabelecimentos do Litoral Sul paulista. A coleta manual de dados fiscais identificada na fase de diagnóstico gerava morosidade no tempo de resposta e suscetibilidade a erros de digitação nas pastas técnicas de vistoria.
+
+Para mitigar exposições de segurança e assegurar tolerância a falhas, a consulta externa não é disparada diretamente pelo navegador do cliente, mas intermediada pela camada de serviços, sendo algumas das características do uso em FastAPI:
+
+* **Entrada e Validação Sintática:** O operador do sistema informa o número de CNPJ no painel administrativo em Next.js (ou o dado é captado via triagem inicial de atendimento).
+* **Requisição Segura no Backend:** A API interna valida os dígitos verificadores do documento e realiza uma chamada HTTP assíncrona ao endpoint oficial `https://brasilapi.com.br/api/cnpj/v1/`
+* **Normalização e Retorno:** A camada de retaguarda trata eventuais códigos de erro, aplica políticas de tempo limite (timeout) e repassa o objeto estruturado com os dados cadastrais para o painel em Next.js.
+* **Persistência Confiável:** Com a validação visual do operador, o registro do lead é gravado no Google Firebase Firestore com dados oficiais consistentes.
+* **Interoperabilidade e Resiliência:** O isolamento da requisição na camada de backend assegura mecanismos de tratamento para cenários de indisponibilidade do serviço público externo, preservando sempre a alternativa de preenchimento manual pelo atendente para evitar o bloqueio do fluxo operacional.
+* **Padronização da Base de Dados:** A recuperação direta de registros oficiais elimina inconsistências de formatação nos campos de razão social e logradouro, viabilizando buscas e relatórios analíticos precisos dentro do CRM.
+
+A automação cadastral reduz o tempo de qualificação e abertura de pastas técnicas de minutos para segundos, eliminando o retrabalho de transcrição de dados e permitindo que os colaboradores concentrem seus esforços no atendimento consultivo aos clientes. Concomitantemente, mitiga-se a taxa de desistência nos canais de contato e estabelece-se um histórico comercial confiável e unificado no painel da PGAVCB.
+
+#### 2.3.5 INTEGRAÇÃO COM A WHATSAPP CLOUD API
+
+O canal oficial de mensagens instantâneas da PG AVCB representa a principal via de captação de clientes da empresa. No Projeto Integrador II - Implementação de Módulo CRM e Automação de Leads com Next.js e Firebase para a empresa PGAVCB, a incorporação desse canal estrutura-se por meio da WhatsApp Business Cloud API (interface oficial mantida pela Meta), operando via recepção assíncrona de eventos (webhooks) direcionados à camada de backend. Essa arquitetura viabiliza que múltiplos operadores compartilhem o mesmo número telefônico corporativo a partir de terminais web distintos, superando a dependência de um dispositivo móvel físico exclusivo. Rejeita-se categoricamente a utilização de bibliotecas não oficiais de automação de interface, escolha que assegura a conformidade estrita aos termos de serviço da plataforma, a conformidade jurídica à Lei Geral de Proteção de Dados (LGPD).
+
+A intervenção técnica responde diretamente ao diagnóstico consolidado na reunião de imersão com a comunidade externa realizada em 19 de agosto de 2026. A análise de campo identificou que a concentração das interações em um único aparelho celular gerava morosidade nas respostas, desorganização no acompanhamento comercial, abandono de propostas por clientes corporativos e ausência total de histórico estruturado. Sem um mecanismo de triagem centralizado, as visitas impulsionadas pela landing page convertiam-se em conversas isoladas. O módulo de CRM estabelece uma camada de gestão e governança sobre essas interações, unificando a esteira de atendimento à persistência em nuvem e à validação cadastral.
+
+A integração entre o canal de mensagens WhatsApp e o sistema ocorre segundo o seguinte fluxo técnico:
+
+* **Recepção de Eventos por Webhook:** O provedor da API encaminha as mensagens recebidas via requisições HTTP POST para o endpoint dedicado no backend (`/api/whatsapp/webhook`), cuja rota correspondente trata a validação formal de segurança exigida pelo protocolo da Meta.
+* **Processamento e Persistência:** A camada em FastAPI processa a carga de dados, cadastra ou atualiza a entidade de contato no banco NoSQL Google Firebase e aloca a interação na fila de triagem compartilhada.
+* **Atendimento Concorrente:** A interface em Next.js exibe a fila de chamados em tempo real, permitindo que operadores autenticados assumam os atendimentos de forma simultânea. A transmissão das respostas ao cliente dá-se de modo transparente via consumo da API oficial.
+* **Automação Cadastral Cruzada:** No momento em que o cliente informa o número do CNPJ no chat, o sistema aciona a BrasilAPI em segundo plano, preenchendo automaticamente razão social, endereço e situação societária na pasta de processo de AVCB/CLCB.
+
+No que tange à segurança da informação, tokens de acesso, credenciais e chaves criptográficas de autenticação permanecem estritamente isolados em variáveis de ambiente protegidas, sem exposição no repositório GitHub.
+
+Evidenciam-se, a seguir, os principais impactos técnicos e as diretrizes de governança de qualidade consolidados pelo sistema:
+
+* **Centralização do Estado Transacional:** O ciclo de vida e o histórico das mensagens residem na infraestrutura em nuvem do Google Firebase, desvinculando o armazenamento de dados da memória física de dispositivos telefônicos locais.
+* **Visibilidade Operacional por Estágios:** A aplicação adota estados formais de funil (novo, em triagem, aguardando cliente, convertido e perdido), tornando os gargalos e o tempo de espera plenamente monitoráveis no painel.
+* **Estratégia de Testes Contínuos:** Para viabilizar a validação automatizada no GitHub Actions sem depender de chamadas tarifadas ou da infraestrutura em produção, as suítes de testes em Pytest utilizam cargas de dados fictícias (mocks).
+
+A transição para um atendimento centralizado elimina o risco de extravio de propostas e assegura celeridade no atendimento de estabelecimentos e condomínios que demandam regularização contra incêndios no Litoral Sul. A administração e a equipe técnica da PGAVCB passam a operar em paralelo, com distribuição ordenada de carga de trabalho e rastreabilidade total de cada vistoria, integrando a atração digital pública e a captação direta em um funil corporativo unificado.
+
+#### 2.3.6 CONTROLE DE VERSÃO GITHUB
+
+O Git atua como o sistema distribuído de controle de versões empregado para gerenciar o ciclo de vida do código-fonte do projeto, enquanto a plataforma remota GitHub, por meio do repositório oficial `https://github.com/kodimier/univesp_PI_II_PJI240_A2026S2N1` consolida o ambiente colaborativo de desenvolvimento do grupo. A garantia da qualidade do artefato apoia-se na execução sistemática de testes automatizados, estruturados com o framework Pytest no backend e com Jest no frontend, integrados a rotinas de integração contínua via GitHub Actions.
+
+A estruturação do versionamento atende rigorosamente às diretrizes pedagógicas da UNIVESP. O acompanhamento acadêmico da disciplina requer a comprovação da participação individual dos integrantes do grupo do Projeto Integrador II por meio de registros de autoria auditáveis no repositório. Dessa maneira:
+
+* Os módulos de serviços e rotas de API são versionados diretamente pelos integrantes responsáveis pela implementação da camada de retaguarda.
+* A pasta `documentos/` concentra as contribuições dos membros designados para fundamentação bibliográfica, elaboração de relatórios técnicos e demais documentos teóricos.
+* A execução e o monitoramento de rotinas de testes automatizados via GitHub consolidam as metas operacionais previstas para a validação contínua da qualidade.
+
+A ausência desse ecossistema comprometeria a auditabilidade do desenvolvimento em equipe e privaria a aplicação de salvaguardas essenciais contra falhas de regressão no módulo de CRM.
+
+O gerenciamento do repositório adota um fluxo estruturado de trabalho cooperativo com políticas estritas de governança de código:
+
+* **Modelo de Ramificações (Branches):** Utiliza-se a ramificação `dev` para integração e desenvolvimento ativo das funcionalidades, reservando-se a ramificação `main` para as versões estáveis e homologadas para entrega e avaliação.
+* **Padronização de Entregas:** Adoção de commits semânticos e descritivos em língua portuguesa, preservando o histórico cronológico individual de cada colaborador sem reescrita artificial de histórico.
+* **Modularização de Diretórios:** Organização física delimitada entre a camada de apresentação (`frontend/`), as regras de negócio e rotas de integração (`backend/`) e os artefatos acadêmicos (`documentos/`).
+* **Rastreabilidade e Avaliação Transparente:** O histórico descentralizado documenta de forma inequívoca o escopo de atuação de cada desenvolvedor nas camadas de frontend, backend e documentação analítica.
+* **Prevenção de Regressão por Integração Contínua:** A esteira de CI no GitHub impede a inserção silenciosa de inconsistências entre as rotas da interface web, a API intermediária e os objetos simulados (mocks) da camada de dados.
+* **Revisão Sistemática de Código:** A utilização de pull requests dirigidos à ramificação de desenvolvimento viabiliza a auditoria prévia entre os pares antes da consolidação definitiva dos recursos no sistema.
+
+Para a PG AVCB, a governança de código entrega um ativo tecnológico modular, reprodutível e documentado, possibilitando que novos colaboradores executem, testem e publiquem a aplicação de maneira padronizada, eliminando divergências de ambiente e mitigando vulnerabilidades antes da homologação final do protótipo.
+
+#### 2.3.7 MÓDULO DE CRM
+
+A gestão estratégica do relacionamento com o cliente ultrapassa a mera utilização de canais digitais de contato, demandando a estruturação de processos integrados que garantam a rastreabilidade e a perenidade das interações comerciais. O Customer Relationship Management (CRM) não deve ser concebido exclusivamente como uma ferramenta tecnológica ou um banco de dados transacional, mas como uma estratégia organizacional integrada que alinha tecnologia, pessoas e processos para mapear necessidades, personalizar o atendimento e elevar os níveis de fidelização e retenção de clientes.
+
+> O Customer Relationship Management não se resume a uma ferramenta tecnológica ou a um software isolado, configurando-se como uma estratégia de negócios voltada ao entendimento e à antecipação das necessidades dos clientes. Trata-se de uma abordagem holística que integra processos, pessoas e tecnologia para atrair e fidelizar o público, maximizando o valor do relacionamento ao longo do tempo. (ZENONE, 2019)
+
+Nesse sentido, a consolidação de uma plataforma de CRM visa mitigar a fragmentação comunicacional, estabelecendo uma visão unificada e contínua do ciclo de vida de cada consumidor na organização.
+
+No cenário diagnosticado na empresa PG AVCB, a expansão das demandas evidenciou a insuficiência de controles informais mantidos em dispositivos móveis individuais. A centralização dos atendimentos em conversas isoladas gerava lentidão no retorno, perda de histórico e riscos na formalização de propostas técnicas de regularização contra incêndios. A implementação de um módulo de CRM integrado responde a essa vulnerabilidade gerencial ao transformar mensagens esparsas em um funil corporativo estruturado:
+
+* **Centralização e Rastreabilidade do Histórico:** Cada solicitação de orçamento de AVCB passa a ser registrada em um repositório centralizado em nuvem, garantindo que múltiplos operadores acessem os antecedentes da negociação sem perda de contexto operacional.
+* **Qualificação e Segmentação de Leads:** O módulo categoriza os estágios de atendimento (triagem inicial, proposta em elaboração, laudo emitido), permitindo à administração acompanhar gargalos na conversão de novos clientes corporativos e condomínios.
+* **Mitigação do Descompasso Operacional:** A automatização de etapas de cadastro aliada à visão sistêmica do relacionamento reduz o retrabalho manual de digitação, permitindo que a equipe corporativa dedique maior tempo à consultoria técnica preventiva e ao cumprimento de prazos legais.
+
+Dessa forma, o módulo de CRM atua como o elo estruturante que converte o tráfego gerado pela presença digital da empresa em ativos relacionais e econômicos consistentes, assegurando eficiência operacional, suporte à tomada de decisões gerenciais e excelência na prestação de serviços de segurança contra incêndios no Litoral Sul.
+
+#### 2.3.8 ACESSIBILIDADE DIGITAL (WCAG 2.1) E ENGENHARIA DA QUALIDADE DE SOFTWARE
 
 A acessibilidade em sistemas web (conhecida pelo sigla a11y) é regida internacionalmente pelas diretrizes do consórcio W3C por intermédio das Web Content Accessibility Guidelines (WCAG 2.1). Essa especificação organiza os requisitos de conformidade em quatro princípios fundamentais: perceptibilidade, operabilidade, compreensibilidade e robustez.
 
@@ -134,7 +253,7 @@ Na interface administrativa desenvolvida, o cumprimento dessas diretrizes envolv
 
 ### 2.4 METODOLOGIA
 
-A metodologia adotada para o desenvolvimento deste projeto fundamenta-se no Design Thinking, uma abordagem centrada no ser humano que busca soluções inovadoras por meio da empatia e da colaboração. O processo está sendo estruturado em três etapas: Ouvir e Interpretar, Criar e Prototipar e por último Implementar e Testar.
+A metodologia adotada para o desenvolvimento deste projeto fundamenta-se no Design Thinking, uma abordagem centrada no ser humano que busca soluções inovadoras por meio da empatia e da colaboração. O processo está sendo estruturado em quatro etapas: Ouvir e Interpretar, Criar e Prototipar e por último Implementar e Testar.
 
 #### 2.4.1 OUVIR E INTERPRETAR
 
