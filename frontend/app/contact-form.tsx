@@ -1,13 +1,33 @@
 "use client";
 
 import { FormEvent, useState } from "react";
-import { sendContact } from "@/lib/crm";
+import { sendContact, lookupCnpj } from "@/lib/crm";
 
 export function ContactForm() {
   const [status, setStatus] = useState<"idle" | "sending" | "ok" | "error">(
     "idle",
   );
   const [detail, setDetail] = useState("");
+  const [cnpj, setCnpj] = useState("");
+  const [name, setName] = useState("");
+  const [isLoadingCnpj, setIsLoadingCnpj] = useState(false);
+
+  async function handleCnpjBlur() {
+    const cleanCnpj = cnpj.replace(/\D/g, "");
+    if (cleanCnpj.length === 14) {
+      setIsLoadingCnpj(true);
+      try {
+        const company = await lookupCnpj(cleanCnpj);
+        if (company.razao_social) {
+          setName(company.razao_social);
+        }
+      } catch (err) {
+        console.warn("CNPJ lookup failed", err);
+      } finally {
+        setIsLoadingCnpj(false);
+      }
+    }
+  }
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -25,6 +45,8 @@ export function ContactForm() {
       setStatus("ok");
       setDetail("Recebemos sua mensagem. A equipe da PGAVCB vai entrar em contato.");
       form.reset();
+      setCnpj("");
+      setName("");
     } catch {
       setStatus("error");
       setDetail("Não foi possível enviar agora. Tente novamente em instantes.");
@@ -34,8 +56,24 @@ export function ContactForm() {
   return (
     <form onSubmit={onSubmit} className="mt-8 space-y-4 text-left" noValidate>
       <div>
+        <label htmlFor="contact-cnpj" className="block text-sm font-medium text-zinc-800 flex justify-between">
+          <span>CNPJ (Opcional - preenche o nome da empresa)</span>
+          {isLoadingCnpj && <span className="text-zinc-500 text-xs">Buscando...</span>}
+        </label>
+        <input
+          id="contact-cnpj"
+          name="cnpj"
+          type="text"
+          value={cnpj}
+          onChange={(e) => setCnpj(e.target.value)}
+          onBlur={handleCnpjBlur}
+          placeholder="00.000.000/0000-00"
+          className="mt-1 w-full rounded-md border border-zinc-300 px-3 py-2 text-zinc-900 focus:border-zinc-900 focus:ring-zinc-900"
+        />
+      </div>
+      <div>
         <label htmlFor="contact-name" className="block text-sm font-medium text-zinc-800">
-          Nome
+          Nome ou Razão Social
         </label>
         <input
           id="contact-name"
@@ -44,7 +82,9 @@ export function ContactForm() {
           autoComplete="name"
           required
           minLength={2}
-          className="mt-1 w-full rounded-md border border-zinc-300 px-3 py-2 text-zinc-900"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className="mt-1 w-full rounded-md border border-zinc-300 px-3 py-2 text-zinc-900 focus:border-zinc-900 focus:ring-zinc-900"
         />
       </div>
       <div>
@@ -57,7 +97,7 @@ export function ContactForm() {
           type="email"
           autoComplete="email"
           required
-          className="mt-1 w-full rounded-md border border-zinc-300 px-3 py-2 text-zinc-900"
+          className="mt-1 w-full rounded-md border border-zinc-300 px-3 py-2 text-zinc-900 focus:border-zinc-900 focus:ring-zinc-900"
         />
       </div>
       <div>
@@ -69,7 +109,7 @@ export function ContactForm() {
           name="phone"
           type="tel"
           autoComplete="tel"
-          className="mt-1 w-full rounded-md border border-zinc-300 px-3 py-2 text-zinc-900"
+          className="mt-1 w-full rounded-md border border-zinc-300 px-3 py-2 text-zinc-900 focus:border-zinc-900 focus:ring-zinc-900"
         />
       </div>
       <div>
@@ -82,7 +122,7 @@ export function ContactForm() {
           required
           minLength={10}
           rows={4}
-          className="mt-1 w-full rounded-md border border-zinc-300 px-3 py-2 text-zinc-900"
+          className="mt-1 w-full rounded-md border border-zinc-300 px-3 py-2 text-zinc-900 focus:border-zinc-900 focus:ring-zinc-900"
         />
       </div>
       <button

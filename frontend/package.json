@@ -3,10 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "dotenv -e .env.mock -- next dev",
+    "dev:mock": "dotenv -e .env.mock -- next dev",
+    "dev:local": "dotenv -e .env.dev -- next dev",
+    "dev:homolog": "dotenv -e .env.homolog -- next dev",
+    "build": "dotenv -e .env.mock -- next build",
+    "build:mock": "dotenv -e .env.mock -- next build",
+    "build:dev": "dotenv -e .env.dev -- next build",
+    "build:homolog": "dotenv -e .env.homolog -- next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "next": "16.2.2",
@@ -15,12 +23,20 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@testing-library/dom": "^10.4.2",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.3",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@vitejs/plugin-react": "^6.1.1",
+    "dotenv-cli": "^8.0.0",
     "eslint": "^9",
     "eslint-config-next": "16.2.2",
+    "eslint-plugin-boundaries": "^7.2.0",
+    "jsdom": "^29.1.1",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^4.1.11"
   }
 }

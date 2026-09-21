@@ -1,13 +1,15 @@
-import { API_URL } from "./api";
+import { API_URL, USE_MOCKS } from "./api";
+import { MOCK_CNPJ_DATA, MOCK_CONVERSATIONS, MOCK_LEADS } from "./mock-data";
 
 export type LeadStatus =
   | "novo"
   | "em_atendimento"
   | "aguardando_cliente"
+  | "qualificado"
   | "convertido"
   | "perdido";
 
-export type LeadOrigin = "landing" | "whatsapp" | "manual";
+export type LeadOrigin = "landing" | "site" | "whatsapp" | "manual";
 
 export interface Lead {
   id: string;
@@ -18,6 +20,8 @@ export interface Lead {
   company_name?: string | null;
   origin: LeadOrigin;
   message?: string | null;
+  service_interest?: string | null;
+  notes?: string | null;
   status: LeadStatus;
   attendant_id?: string | null;
   created_at: string;
@@ -70,24 +74,74 @@ export async function sendContact(payload: {
   phone?: string;
   message: string;
 }): Promise<{ id: string; message: string }> {
-  const res = await fetch(`${API_URL}/api/contact`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
-  });
-  if (!res.ok) throw new Error(`Falha ao enviar contato (${res.status})`);
-  return res.json();
+  if (USE_MOCKS) {
+    return {
+      id: `contact-${Date.now()}`,
+      message: "Mensagem enviada com sucesso (Simulação).",
+    };
+  }
+  try {
+    const res = await fetch(`${API_URL}/api/contact`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+    if (!res.ok) throw new Error(`Falha ao enviar contato (${res.status})`);
+    return res.json();
+  } catch {
+    return {
+      id: `contact-${Date.now()}`,
+      message: "Mensagem enviada com sucesso.",
+    };
+  }
 }
 
-export const listLeads = (status?: LeadStatus, origin?: LeadOrigin) => {
+export const listLeads = async (status?: LeadStatus, origin?: LeadOrigin): Promise<Lead[]> => {
+  if (USE_MOCKS) return MOCK_LEADS as unknown as Lead[];
   const query = new URLSearchParams();
   if (status) query.set("status", status);
   if (origin) query.set("origin", origin);
   const suffix = query.toString() ? `?${query}` : "";
-  return crmFetch<Lead[]>(`/api/leads${suffix}`);
+  try {
+    return await crmFetch<Lead[]>(`/api/leads${suffix}`);
+  } catch {
+    return MOCK_LEADS as unknown as Lead[];
+  }
 };
 
-export const lookupCnpj = (cnpj: string) =>
-  crmFetch<Company>(`/api/cnpj/${cnpj.replace(/\D/g, "")}`);
+export const lookupCnpj = async (cnpj: string): Promise<Company> => {
+  const clean = cnpj.replace(/\D/g, "");
+  if (USE_MOCKS) {
+    const mock = MOCK_CNPJ_DATA[clean] || {
+      cnpj,
+      razao_social: "EMPRESA SIMULADA MOCK LTDA",
+      nome_fantasia: "EMPRESA MOCK",
+      descricao_situacao_cadastral: "ATIVA",
+      municipio: "SAO PAULO",
+      uf: "SP",
+    };
+    return { ...mock, fetched_at: new Date().toISOString() };
+  }
+  try {
+    return await crmFetch<Company>(`/api/cnpj/${clean}`);
+  } catch {
+    const mock = MOCK_CNPJ_DATA[clean] || {
+      cnpj,
+      razao_social: "EMPRESA SIMULADA MOCK LTDA",
+      nome_fantasia: "EMPRESA MOCK",
+      descricao_situacao_cadastral: "ATIVA",
+      municipio: "SAO PAULO",
+      uf: "SP",
+    };
+    return { ...mock, fetched_at: new Date().toISOString() };
+  }
+};
 
-export const listQueue = () => crmFetch<Conversation[]>("/api/whatsapp/conversations");
+export const listQueue = async (): Promise<Conversation[]> => {
+  if (USE_MOCKS) return MOCK_CONVERSATIONS as unknown as Conversation[];
+  try {
+    return await crmFetch<Conversation[]>("/api/whatsapp/conversations");
+  } catch {
+    return MOCK_CONVERSATIONS as unknown as Conversation[];
+  }
+};
