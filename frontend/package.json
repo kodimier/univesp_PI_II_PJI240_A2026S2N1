@@ -3,11 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "dotenv -e .env.mock -- next dev",
+    "dev": "dotenv -e .env.local -- next dev",
     "dev:mock": "dotenv -e .env.mock -- next dev",
     "dev:local": "dotenv -e .env.dev -- next dev",
     "dev:homolog": "dotenv -e .env.homolog -- next dev",
-    "build": "dotenv -e .env.mock -- next build",
+    "build": "dotenv -e .env.dev -- next build",
     "build:mock": "dotenv -e .env.mock -- next build",
     "build:dev": "dotenv -e .env.dev -- next build",
     "build:homolog": "dotenv -e .env.homolog -- next build",
@@ -17,6 +17,7 @@
     "test:watch": "vitest"
   },
   "dependencies": {
+    "lucide-react": "^1.47.0",
     "next": "16.2.2",
     "react": "19.2.4",
     "react-dom": "19.2.4"

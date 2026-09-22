@@ -80,6 +80,10 @@ async function request<T>(path: string, options: RequestInit = {}): Promise<T> {
     throw new Error(errorDetail);
   }
 
+  if (res.status === 204) {
+    return undefined as T;
+  }
+
   return res.json() as Promise<T>;
 }
 
@@ -316,6 +320,20 @@ export const createAttendant = async (
   return request<Attendant>("/api/attendants", {
     method: "POST",
     body: JSON.stringify(payload),
+  });
+};
+
+export const deleteAttendant = async (attendantId: string): Promise<void> => {
+  if (USE_MOCKS) {
+    const index = mockAttendantsState.findIndex((attendant) => attendant.id === attendantId);
+    if (index !== -1) {
+      mockAttendantsState.splice(index, 1);
+    }
+    return;
+  }
+
+  await request<void>(`/api/attendants/${attendantId}`, {
+    method: "DELETE",
   });
 };
 

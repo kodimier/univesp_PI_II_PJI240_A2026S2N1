@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
-import { listAttendants, createAttendant } from "@/lib/crm-api";
+import { listAttendants, createAttendant, deleteAttendant } from "@/lib/crm-api";
 import { Attendant } from "@/lib/crm-types";
 
 export default function AttendantsPage() {
@@ -43,6 +43,18 @@ export default function AttendantsPage() {
       setMessage(`Erro ao cadastrar: ${err instanceof Error ? err.message : "Falha na requisição"}`);
     } finally {
       setSubmitting(false);
+    }
+  };
+
+  const handleDelete = async (attendantId: string) => {
+    if (!window.confirm("Deseja remover este atendente do CRM?")) return;
+
+    try {
+      await deleteAttendant(attendantId);
+      setMessage("Atendente removido com sucesso!");
+      await fetchAttendants();
+    } catch (err: unknown) {
+      setMessage(`Erro ao remover: ${err instanceof Error ? err.message : "Falha na requisição"}`);
     }
   };
 
@@ -145,6 +157,13 @@ export default function AttendantsPage() {
                     >
                       {att.active ? "Ativo" : "Inativo"}
                     </span>
+                    <button
+                      type="button"
+                      onClick={() => handleDelete(att.id)}
+                      className="text-xs px-2.5 py-1.5 rounded-md border border-red-500/40 bg-red-500/10 text-red-300 hover:bg-red-500/20 transition"
+                    >
+                      Remover
+                    </button>
                   </div>
                 </div>
               ))

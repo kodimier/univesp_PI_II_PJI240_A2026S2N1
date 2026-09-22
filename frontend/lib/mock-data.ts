@@ -34,7 +34,7 @@ export const MOCK_ASSETS: Asset[] = [
   {
     id: "ast-1",
     name: "Extintor e Mangueira",
-    url: "/images/hero-fire.jpg",
+    url: "/hero.jpg",
     mime_type: "image/jpeg",
     category: "general",
   },

@@ -51,5 +51,13 @@ def set_doc(collection: str, doc_id: str, payload: dict[str, Any]) -> dict[str, 
     return {"id": doc_id, **body}
 
 
+def delete_doc(collection: str, doc_id: str) -> bool:
+    doc = get_doc(collection, doc_id)
+    if doc is None:
+        return False
+    get_db().collection(collection).document(doc_id).delete()
+    return True
+
+
 def find_docs(collection: str, field: str, value: Any) -> list[dict[str, Any]]:
     return [doc for doc in list_docs(collection) if doc.get(field) == value]

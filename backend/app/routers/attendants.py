@@ -5,7 +5,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from app.auth import require_crm_token
 from app.collections import ATTENDANTS
 from app.models.attendant import Attendant, AttendantCreate, AttendantUpdate
-from app.store import create_doc, get_doc, list_docs, update_doc
+from app.store import create_doc, delete_doc, get_doc, list_docs, update_doc
 
 router = APIRouter(
     tags=["CRM — Atendentes"],
@@ -43,3 +43,11 @@ def update_attendant(attendant_id: str, payload: AttendantUpdate):
     if doc is None:
         raise HTTPException(status_code=404, detail="Atendente não encontrado.")
     return _to_attendant(doc)
+
+
+@router.delete("/attendants/{attendant_id}", status_code=204)
+def delete_attendant(attendant_id: str):
+    deleted = delete_doc(ATTENDANTS, attendant_id)
+    if not deleted:
+        raise HTTPException(status_code=404, detail="Atendente não encontrado.")
+    return None

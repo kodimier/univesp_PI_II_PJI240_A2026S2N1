@@ -80,20 +80,23 @@ export async function sendContact(payload: {
       message: "Mensagem enviada com sucesso (Simulação).",
     };
   }
-  try {
-    const res = await fetch(`${API_URL}/api/contact`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
-    if (!res.ok) throw new Error(`Falha ao enviar contato (${res.status})`);
-    return res.json();
-  } catch {
-    return {
-      id: `contact-${Date.now()}`,
-      message: "Mensagem enviada com sucesso.",
-    };
+
+  const res = await fetch(`${API_URL}/api/contact`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+
+  if (!res.ok) {
+    const payloadError = await res.json().catch(() => ({}));
+    const message =
+      typeof payloadError?.detail === "string"
+        ? payloadError.detail
+        : `Falha ao enviar contato (${res.status})`;
+    throw new Error(message);
   }
+
+  return res.json();
 }
 
 export const listLeads = async (status?: LeadStatus, origin?: LeadOrigin): Promise<Lead[]> => {
