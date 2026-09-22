@@ -11,7 +11,7 @@ Victor Hugo Ferreira Paschoal
 
 **Implementação de Módulo CRM e Automação de Leads com Next.js e Firebase para a empresa PGAVCB**
 
-Itanhaém / Peruíbe - SP
+Itanhaém/Peruíbe - SP
 2026
 
 ---
@@ -27,19 +27,53 @@ Itanhaém / Peruíbe - SP
 
 ---
 
-KUMAYAMA, Bruna Tavares; OLIVEIRA, Bruno Pinheiro de; GONÇALVES, Celso Albiquerque; BARBOSA, Fernando Lima; SHIMADA, Leandro Yoshio; MICHELS, Nelson T; SANTOS, Paulo Fellipe Proença dos; PASCHOAL, Victor Hugo Ferreira.
+KUMAYAMA, Bruna Tavares; OLIVEIRA, Bruno Pinheiro de; GONÇALVES, Celso Albuquerque; BARBOSA, Fernando Lima; SHIMADA, Leandro Yoshio; MICHELS, Nelson T; SANTOS, Paulo Fellipe Proença dos; PASCHOAL, Victor Hugo Ferreira.
 Implementação de Módulo CRM e Automação de Leads com Next.js e Firebase para a empresa PGAVCB. Relatório Técnico-Científico. Ciência de Dados, Engenharia de Computação e Tecnologia da Informação - Universidade Virtual do Estado de São Paulo. Tutor: Amanda Silva do Carmo. Polo Itanhaém e Peruíbe, 2026.
 
 ## RESUMO
 
-Este O presente trabalho documenta o desenvolvimento parcial de uma solução computacional evolutiva voltada à empresa PG AVCB, consultoria especializada em Engenharia de Segurança Contra Incêndios sediada no litoral sul paulista. A pesquisa origina-se do descompasso operacional ocasionado pelo aumento de demandas após o primeiro ciclo do projeto, resultando em sobrecarga na triagem de contatos via WhatsApp, ausência de compartilhamento do atendimento entre múltiplos operadores e lentidão no cadastramento manual de pessoas jurídicas e condomínios. O objetivo central compreende o desenvolvimento e o acoplamento de um módulo de CRM (Customer Relationship Management) acessível ao painel administrativo previamente construído, incorporando consumo automatizado de dados cadastrais via BrasilAPI, diretrizes de acessibilidade na web (WCAG/Lighthouse), suíte de testes de software e persistência em nuvem com Firebase. A metodologia estrutura-se nos preceitos do Design Thinking, perpassando as etapas de imersão, ideação e prototipagem contínua. Os resultados parciais comprovam a viabilidade estrutural do fluxo arquitetural concebido: a extensão dos esquemas do Firebase Firestore para suportar estágios de atendimento, a integração de rotas assíncronas no framework Next.js para consumo de APIs públicas e a aplicação de diretrizes de contraste e navegação por teclado. O versionamento colaborativo sob o GitHub e o emprego de testes automatizados garantem a confiabilidade e estabilidade necessárias para entregar uma ferramenta inclusiva e de alto rendimento corporativo.
+O presente trabalho documenta o desenvolvimento parcial de uma solução computacional evolutiva voltada à empresa PG AVCB, consultoria especializada em Engenharia de Segurança Contra Incêndios sediada no litoral sul paulista. A pesquisa origina-se do descompasso operacional ocasionado pelo aumento de demandas após o primeiro ciclo do projeto, resultando em sobrecarga na triagem de contatos via WhatsApp, ausência de compartilhamento do atendimento entre múltiplos operadores e lentidão no cadastramento manual de pessoas jurídicas e condomínios. O objetivo central compreende o desenvolvimento e o acoplamento de um módulo de CRM (Customer Relationship Management) acessível ao painel administrativo previamente construído, incorporando consumo automatizado de dados cadastrais via BrasilAPI, diretrizes de acessibilidade na web (WCAG/Lighthouse), suíte de testes de software e persistência em nuvem com Firebase. A metodologia estrutura-se nos preceitos do Design Thinking, perpassando as etapas de imersão, ideação e prototipagem contínua. Os resultados parciais comprovam a viabilidade estrutural do fluxo arquitetural concebido: a extensão dos esquemas do Firebase Firestore para suportar estágios de atendimento, a integração de rotas assíncronas no framework Next.js para consumo de APIs públicas e a aplicação de diretrizes de contraste e navegação por teclado. O versionamento colaborativo sob o GitHub e o emprego de testes automatizados garantem a confiabilidade e estabilidade necessárias para entregar uma ferramenta inclusiva e de alto rendimento corporativo.
 
 **PALAVRAS-CHAVE:** PG AVCB; CRM; Automação de Leads; BrasilAPI; Acessibilidade Web; Firebase; Next.js
 
 ## LISTA DE ILUSTRAÇÕES
 
+FIGURA 1 - MODELO ENTIDADE-RELACIONAMENTO | 29
+FIGURA 2 - CONEXÃO DE INTERFACE A BANCO DE DADOS | 29
+FIGURA 3 - CRIAÇÃO DE REPOSITÓRIO GITHUB | 30
+
 ## SUMÁRIO
 
+1 INTRODUÇÃO | 6
+2 DESENVOLVIMENTO | 7
+2.1 OBJETIVOS | 7
+2.1.1 OBJETIVOS ESPECÍFICOS | 7
+2.2 DELIMITAÇÃO DO PROBLEMA | 8
+2.2.1 JUSTIFICATIVA | 8
+2.2.2 RELEVÂNCIA SOCIAL E LOCAL | 8
+2.2.3 RELEVÂNCIA EMPRESARIAL E CULTURAL | 9
+2.2.4 RELEVÂNCIA ACADÊMICA | 9
+2.2.5 RELEVÂNCIA E CONTRIBUIÇÕES PARA O PROJETO LOCAL | 9
+2.3 FUNDAMENTAÇÃO TEÓRICA | 10
+2.3.1 O DESIGN THINKING NA SOLUÇÃO DE PROBLEMAS | 10
+2.3.2 ARQUITETURA REATIVA EM NEXT.JS E PERSISTÊNCIA EM NUVEM COM FIREBASE | 11
+2.3.3 CAMADA DE SERVIÇOS BACKEND COM FASTAPI | 14
+2.3.4 INTEGRAÇÃO DE APIS RESTFUL E AUTOMAÇÃO DE DADOS CADASTRAIS (BRASILAPI) | 16
+2.3.5 INTEGRAÇÃO COM A WHATSAPP CLOUD API | 18
+2.3.6 CONTROLE DE VERSÃO GITHUB | 20
+2.3.7 MÓDULO DE CRM | 22
+2.3.8 ACESSIBILIDADE DIGITAL (WCAG 2.1) E ENGENHARIA DA QUALIDADE DE SOFTWARE | 24
+2.4 METODOLOGIA | 24
+2.4.1 OUVIR E INTERPRETAR | 24
+2.4.2 CRIAR E PROTOTIPAR | 25
+2.4.3 IMPLEMENTAR E TESTAR | 26
+2.5 RESULTADOS PRELIMINARES | 27
+2.5.1 RESULTADOS PRELIMINARES | 27
+2.5.2 RESULTADOS DO PASSO: CRIAR (PROTOTIPAGEM E ARQUITETURA) | 28
+2.5.3 RESULTADOS DO PASSO: IMPLEMENTAR (SOLUÇÃO INICIAL) | 30
+REFERÊNCIAS | 31
+
+---
 ## 1 INTRODUÇÃO
 
 No segmento de Engenharia de Segurança Contra Incêndios, a emissão e a renovação de documentos regulatórios, tais como o Auto de Vistoria do Corpo de Bombeiros (AVCB) e o Certificado de Licença do Corpo de Bombeiros (CLCB) configuram serviços de alta especificidade técnica e rigor procedimental, demandando atendimento assertivo e gestão ágil de prazos legais. A empresa parceira PGAVCB, atuante nos municípios de Praia Grande e Peruíbe com abrangência em todo o litoral sul do Estado de São Paulo, concluiu exitosamente no ciclo anterior a implantação de uma infraestrutura web dinâmica com painel administrativo. Tal iniciativa superou o antigo déficit de exposição mercadológica e estabeleceu canais de captação digital integrados.
@@ -96,13 +130,13 @@ Para a comunidade externa e os municípios de Praia Grande e Peruíbe, o projeto
 
 ### 2.3 FUNDAMENTAÇÃO TEÓRICA
 
-A construção de uma solução web exige a convergência entre metodologias de inovação, estratégias de marketing digital e tecnologias de alta performance. Esta seção fundamenta os pilares teóricos que sustentam o desenvolvimento do projeto.
+A construção de uma solução web exige a convergência entre metodologias de inovação, estratégias de marketing digital e technologies de alta performance. Esta seção fundamenta os pilares teóricos que sustentam o desenvolvimento do projeto.
 
 #### 2.3.1 O DESIGN THINKING NA SOLUÇÃO DE PROBLEMAS
 
 Os requisitos para utilização do módulo de CRM orientou-se pelos preceitos do Design Thinking, assegurando que as funcionalidades planejadas respondessem diretamente às fragilidades operacionais do negócio. Ao afastar-se de um modelo estritamente prescritivo de engenharia de software, a metodologia viabilizou uma dinâmica colaborativa contínua com os gestores da PG AVCB. Nesse processo, a experiência prática da empresa no setor de segurança contra incêndios somou-se às demandas dos clientes por um atendimento ágil, convertendo necessidades reais em diretrizes funcionais para o sistema. O valor dessa construção conjunta apoia-se no arcabouço teórico que concebe a abordagem como uma prática empática e compartilhada:
 
-> "Design Thinking is a problem-solving approach and a human-centered innovation. It's a five step process: Observation, Ideation, Prototyping, Testing and Implementation. It puts people we design for at the center of the process and invites them to co-create solutions." (UNDP, 2014, p. 5).
+> "Design Thinking is a problem-solving approach and a human-centered innovation. It's a five step process: Observation, Ideation, Prototyping, Testing and Implementation. It puts people we design for at the center of the process and invites them to co-create solutions." (UNDP, 2014).
 
 A condução do trabalho fundamentada na empatia e no diálogo sistemático com os parceiros externos desloca a atuação do grupo da mera implementação de rotinas computacionais para a entrega de um artefato de real utilidade socioeconômica. Essa orientação assegura que a modelagem da interface e as regras de negócio atendam com precisão às fragilidades operacionais diagnosticadas durante a fase exploratória da empresa.
 
@@ -194,7 +228,7 @@ A integração entre o canal de mensagens WhatsApp e o sistema ocorre segundo o 
 * **Recepção de Eventos por Webhook:** O provedor da API encaminha as mensagens recebidas via requisições HTTP POST para o endpoint dedicado no backend (`/api/whatsapp/webhook`), cuja rota correspondente trata a validação formal de segurança exigida pelo protocolo da Meta.
 * **Processamento e Persistência:** A camada em FastAPI processa a carga de dados, cadastra ou atualiza a entidade de contato no banco NoSQL Google Firebase e aloca a interação na fila de triagem compartilhada.
 * **Atendimento Concorrente:** A interface em Next.js exibe a fila de chamados em tempo real, permitindo que operadores autenticados assumam os atendimentos de forma simultânea. A transmissão das respostas ao cliente dá-se de modo transparente via consumo da API oficial.
-* **Automação Cadastral Cruzada:** No momento em que o cliente informa o número do CNPJ no chat, o sistema aciona a BrasilAPI em segundo plano, preenchendo automaticamente razão social, endereço e situação societária na pasta de processo de AVCB/CLCB.
+* **Automação Cadastral Cruzada:** Quando o cliente informa o número do CNPJ no chat, o sistema aciona a BrasilAPI em segundo plano, preenchendo automaticamente razão social, endereço e situação societária na pasta de processo de AVCB/CLCB.
 
 No que tange à segurança da informação, tokens de acesso, credenciais e chaves criptográficas de autenticação permanecem estritamente isolados em variáveis de ambiente protegidas, sem exposição no repositório GitHub.
 
@@ -247,7 +281,7 @@ Dessa forma, o módulo de CRM atua como o elo estruturante que converte o tráfe
 
 #### 2.3.8 ACESSIBILIDADE DIGITAL (WCAG 2.1) E ENGENHARIA DA QUALIDADE DE SOFTWARE
 
-A acessibilidade em sistemas web (conhecida pelo sigla a11y) é regida internacionalmente pelas diretrizes do consórcio W3C por intermédio das Web Content Accessibility Guidelines (WCAG 2.1). Essa especificação organiza os requisitos de conformidade em quatro princípios fundamentais: perceptibilidade, operabilidade, compreensibilidade e robustez.
+A acessibilidade em sistemas web (conhecida pela sigla a11y) é regida internacionalmente pelas diretrizes do consórcio W3C por intermédio das Web Content Accessibility Guidelines (WCAG 2.1). Essa especificação organiza os requisitos de conformidade em quatro princípios fundamentais: perceptibilidade, operabilidade, compreensibilidade e robustez.
 
 Na interface administrativa desenvolvida, o cumprimento dessas diretrizes envolve o uso obrigatório de marcação semântica em formulários (tags `<label>`), cálculo de taxa de contraste adequado entre primeiro plano e fundo, navegabilidade orientada a atalhos de teclado e suporte a tecnologias assistivas (leitores de tela), sendo auditada por meio de ferramentas analíticas consolidadas, como o Google Lighthouse. Por fim, a garantia da estabilidade do software apoia-se na adoção de testes automatizados unitários e de integração, garantindo que modificações contínuas no repositório GitHub não gerem falhas de regressão no ambiente produtivo.
 
@@ -357,25 +391,21 @@ A criação do ambiente de controle de versão distribuído dedicado à evoluç�
 
 UNDP. Design Thinking for Public Service Excellence. Singapura: UNDP Global Centre for Public Service Excellence, 2014.
 
-BRASILAPI. Brasil API: transformando o Brasil em uma API. Disponível em: https://brasilapi.com.br/docs. Acesso em: 10 set. 2026.
+BRASILAPI. Brasil API: transformando o Brasil em uma API. Disponível em: https://brasilapi.com.br/docs.
 
-CHACON, Scott; STRAUB, Ben. Pro Git. 2. ed. New York: Apress, 2014. Versão atualizada em out. 2024. Disponível em: https://git-scm.com/book/pt-br/v2
+CHACON, Scott; STRAUB, Ben. Pro Git. 2. ed. New York: Apress, 2014. Disponível em: https://git-scm.com/book/pt-br/v2
 
-FASTAPI. FastAPI Documentation. 2026. Disponível em: https://fastapi.tiangolo.com/.
+FASTAPI. FastAPI Documentation. Disponível em: https://fastapi.tiangolo.com/.
 
-FLANAGAN, David. JavaScript: o guia definitivo. 7. ed. Porto Alegre: Bookman, 2021. Disponível em: https://app.minhabiblioteca.com.br/reader/books/9788582607008. Acesso em: 10 set. 2026.
+ZENONE, Luiz Claudio. CRM (Customer Relationship Management). São Paulo: Actual/Grupo Almedina, 2019. Disponível em: https://app.minhabiblioteca.com.br/reader/books/9788562937248/
 
-ZENONE, Luiz Claudio. CRM (Customer Relationship Management): marketing de relacionamento, fidelização de clientes e pós-venda. São Paulo: Actual/Grupo Almedina, 2019. E-book. ISBN 9788562937248. Disponível em: https://app.minhabiblioteca.com.br/reader/books/9788562937248/
+MASSE, Mark. REST API design rulebook: designing consistent RESTful web service interfaces. O'Reilly Media, Inc., 2011.
 
-KRUG, Steve. Não me faça pensar: uma abordagem de bom senso à usabilidade na web. 2. ed. Rio de Janeiro: Alta Books, 2005. Disponível em: https://www.ks-1.ru/data/images/61/cele591f36ad754cb7afffa8babeaa0cfba90ee4.pdf. Acesso em: 10 set. 2026.
-
-MASSE, Mark. REST API design rulebook: designing consistent RESTful web service interfaces. " O'Reilly Media, Inc.", 2011.
-
-MOKOGINTA, Putri; WATTIMENA, C. Developing Modern JavaScript Frameworks for Building Interactive Single-Page Applications. International Journal Software Engineering and Computer Science (IJSECS), v. 4, n. 2, p. 484-496, ago. 2024.
+MOKOGINTA, Putri; WATTIMENA, C. Developing Modern JavaScript Frameworks for Building Interactive Single-Page Applications. International Journal Software Engineering and Computer Science (IJSECS), 2024.
 
 PRESSMAN, Roger S.; MAXIM, Bruce R. Engenharia de software: uma abordagem profissional. 9. ed. Porto Alegre: AMGH, 2021.
 
-SÃO PAULO (Estado). Decreto Estadual nº 69.118, de 09 de dezembro de 2024. Institui o Regulamento de Segurança contra Incêndios das edificações e áreas de risco no Estado de São Paulo. Diário Oficial do Estado de São Paulo, São Paulo, 09 dez. 2024. Disponível em: https://www.al.sp.gov.br/repositorio/legislacao/decreto/2024/decreto-69118-09.12.2024.html
+SÃO PAULO (Estado). Decreto Estadual nº 69.118, de 09 de dezembro de 2024. Institui o Regulamento de Segurança contra Incêndios das edificações e áreas de risco no Estado de São Paulo. Diário Oficial do Estado de São Paulo, 2024. Disponível em: https://www.al.sp.gov.br/repositorio/legislacao/decreto/2024/decreto-69118-09.12.2024.html
 
 WORLD WIDE WEB CONSORTIUM (W3C). Web Content Accessibility Guidelines (WCAG) 2.1. W3C Recommendation, 2018. Disponível em: https://www.w3.org/TR/WCAG21/
 
