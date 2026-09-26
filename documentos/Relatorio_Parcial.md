@@ -32,9 +32,9 @@ Implementação de Módulo CRM e Automação de Leads com Next.js e Firebase par
 
 ## RESUMO
 
-O presente trabalho documenta o desenvolvimento parcial de uma solução computacional evolutiva voltada à empresa PG AVCB, consultoria especializada em Engenharia de Segurança Contra Incêndios sediada no litoral sul paulista. A pesquisa origina-se do descompasso operacional ocasionado pelo aumento de demandas após o primeiro ciclo do projeto, resultando em sobrecarga na triagem de contatos via *WhatsApp*, ausência de compartilhamento do atendimento entre múltiplos operadores e lentidão no cadastramento manual de pessoas jurídicas e condomínios. O objetivo central compreende o desenvolvimento e o acoplamento de um módulo de CRM (*Customer Relationship Management*) acessível ao painel administrativo previamente construído, incorporando consumo automatizado de dados cadastrais via BrasilAPI, diretrizes de acessibilidade na web (WCAG/*Lighthouse*), suíte de testes de software e persistência em nuvem com *Firebase*. A metodologia estrutura-se nos preceitos do *Design Thinking*, perpassando as etapas de imersão, ideação e prototipagem contínua. Os resultados parciais comprovam a viabilidade estrutural do fluxo arquitetural concebido: a extensão dos esquemas do *Firebase Firestore* para suportar estágios de atendimento, a integração de rotas assíncronas no *framework* Next.js para consumo de APIs públicas e a aplicação de diretrizes de contraste e navegação por teclado. O versionamento colaborativo sob o GitHub e o emprego de testes automatizados garantem a confiabilidade e estabilidade necessárias para entregar uma ferramenta inclusiva e de alto rendimento corporativo.
+O presente trabalho documenta o desenvolvimento parcial de uma solução computacional evolutiva voltada à empresa PG AVCB, consultoria especializada em Engenharia de Segurança Contra Incêndios sediada no litoral sul paulista. A pesquisa origina-se do descompasso operacional ocasionado pelo aumento de demandas após o primeiro ciclo do projeto, resultando em sobrecarga na triagem de contatos via WhatsApp, ausência de compartilhamento do atendimento entre múltiplos operadores e lentidão no cadastramento manual de pessoas jurídicas e condomínios. O objetivo central compreende o desenvolvimento e o acoplamento de um módulo de CRM (*Customer Relationship Management*) acessível ao painel administrativo previamente construído, incorporando consumo automatizado de dados cadastrais via BrasilAPI, diretrizes de acessibilidade na web (WCAG/Lighthouse), suíte de testes de software e persistência em nuvem com Firebase. A metodologia estrutura-se nos preceitos do *Design Thinking*, perpassando as etapas de imersão, ideação e prototipagem contínua. Os resultados parciais comprovam a viabilidade estrutural do fluxo arquitetural concebido: a extensão dos esquemas do Firebase Firestore para suportar estágios de atendimento, a integração de rotas assíncronas no *framework* Next.js para consumo de APIs públicas e a aplicação de diretrizes de contraste e navegação por teclado. O versionamento colaborativo sob o GitHub e o emprego de testes automatizados garantem a confiabilidade e estabilidade necessárias para entregar uma ferramenta inclusiva e de alto rendimento corporativo.
 
-**PALAVRAS-CHAVE:** PG AVCB; CRM; Automação de *Leads*; BrasilAPI; Acessibilidade Web; *Firebase*; Next.js
+**PALAVRAS-CHAVE:** PG AVCB; CRM; Automação de *Leads*; BrasilAPI; Acessibilidade Web; Firebase; Next.js
 
 ## LISTA DE ILUSTRAÇÕES
 
@@ -59,10 +59,10 @@ FIGURA 3 - CRIAÇÃO DE REPOSITÓRIO GITHUB | 30
 2.3.2 ARQUITETURA REATIVA EM NEXT.JS E PERSISTÊNCIA EM NUVEM COM FIREBASE | 11
 2.3.3 CAMADA DE SERVIÇOS BACKEND COM FASTAPI | 14
 2.3.4 INTEGRAÇÃO DE APIS *RESTFUL* E AUTOMAÇÃO DE DADOS CADASTRAIS (BRASILAPI) | 16
-2.3.5 INTEGRAÇÃO COM A *WHATSAPP CLOUD API* | 18
+2.3.5 INTEGRAÇÃO COM A WHATSAPP CLOUD API | 18
 2.3.6 CONTROLE DE VERSÃO GITHUB | 20
 2.3.7 MÓDULO DE CRM | 22
-2.3.8 ACESSIBILIDADE DIGITAL (WCAG 2.1) E ENGENHARIA DA QUALIDADE DE SOFTWARE | 24
+2.3.8 ACESSIBILIDADE DIGITAL (WCAG 2.1) E ENGENHARIA DA QUALIDADE DE *SOFTWARE* | 24
 2.4 METODOLOGIA | 24
 2.4.1 OUVIR E INTERPRETAR | 24
 2.4.2 CRIAR E PROTOTIPAR | 25
@@ -78,17 +78,17 @@ REFERÊNCIAS | 31
 
 No segmento de Engenharia de Segurança Contra Incêndios, a emissão e a renovação de documentos regulatórios, tais como o Auto de Vistoria do Corpo de Bombeiros (AVCB) e o Certificado de Licença do Corpo de Bombeiros (CLCB) configuram serviços de alta especificidade técnica e rigor procedimental (São Paulo, 2017), demandando atendimento assertivo e gestão ágil de prazos legais. A empresa parceira PGAVCB, atuante nos municípios de Praia Grande e Peruíbe com abrangência em todo o litoral sul do Estado de São Paulo, concluiu exitosamente no ciclo anterior a implantação de uma infraestrutura web dinâmica com painel administrativo. Tal iniciativa superou o antigo déficit de exposição mercadológica e estabeleceu canais de captação digital integrados.
 
-Contudo, a elevação no volume de acessos e a centralização dos contatos primários no aplicativo *WhatsApp* revelaram uma nova barreira operacional. A dinâmica de atendimento pulverizou-se em um único canal desprovido de ferramentas de gestão compartilhada, provocando lentidão nas respostas, conversas desordenadas e risco de perda de propostas comerciais de pessoas jurídicas. Paralelamente, o preenchimento dos dados cadastrais necessários para emissão de orçamentos e abertura de pastas técnicas (como razão social, CNPJ, logradouro e atividade econômica) permaneceu dependente de digitação manual, tornando o fluxo de trabalho burocrático e suscetível a erros de transcrição.
+Contudo, a elevação no volume de acessos e a centralização dos contatos primários no aplicativo WhatsApp revelaram uma nova barreira operacional. A dinâmica de atendimento pulverizou-se em um único canal desprovido de ferramentas de gestão compartilhada, provocando lentidão nas respostas, conversas desordenadas e risco de perda de propostas comerciais de pessoas jurídicas. Paralelamente, o preenchimento dos dados cadastrais necessários para emissão de orçamentos e abertura de pastas técnicas (como razão social, CNPJ, logradouro e atividade econômica) permaneceu dependente de digitação manual, tornando o fluxo de trabalho burocrático e suscetível a erros de transcrição.
 
 Diante deste panorama real de mercado, o objeto do presente projeto integrador consiste no projeto, desenvolvimento e integração de um módulo nativo de CRM (*Customer Relationship Management*) diretamente acoplado ao painel administrativo da empresa, amparado pelo framework Next.js e pela infraestrutura em nuvem do Google Firebase. O sistema incorpora o consumo automatizado de dados cadastrais públicos por meio da BrasilAPI, o atendimento a padrões rigorosos de acessibilidade web (WCAG 2.1) e uma rotina sistemática de testes e controle de versão profissional via GitHub.
 
-O estudo articula-se diretamente às disciplinas formativas dos cursos de Computação da UNIVESP. Disciplinas como Engenharia de *Software*, Desenvolvimento Web, Banco de Dados e Interação Humano-Computador fornecem a estrutura conceitual para transformar necessidades operacionais em componentes de software reutilizáveis, seguros e acessíveis (Sommerville, 2018), demonstrando como a tecnologia aplicada mitiga obstáculos organizacionais e potencializa a prestação de serviços essenciais à coletividade.
+O estudo articula-se diretamente às disciplinas formativas dos cursos de Computação da UNIVESP. Disciplinas como Engenharia de *Software*, Desenvolvimento Web, Banco de Dados e Interação Humano-Computador fornecem a estrutura conceitual para transformar necessidades operacionais em componentes de *software* reutilizáveis, seguros e acessíveis (Sommerville, 2018), demonstrando como a tecnologia aplicada mitiga obstáculos organizacionais e potencializa a prestação de serviços essenciais à coletividade.
 
 ## 2 DESENVOLVIMENTO
 
 ### 2.1 OBJETIVOS
 
-Desenvolver e integrar um módulo de CRM acessível ao painel administrativo da empresa PGAVCB, fundamentado no *framework* Next.js e no banco de dados em nuvem Google Firebase, centralizando as demandas de atendimento, automatizando a consulta de dados cadastrais via BrasilAPI e estabelecendo conformidade com diretrizes de acessibilidade e testes de software.
+Desenvolver e integrar um módulo de CRM acessível ao painel administrativo da empresa PGAVCB, fundamentado no *framework* Next.js e no banco de dados em nuvem Google Firebase, centralizando as demandas de atendimento, automatizando a consulta de dados cadastrais via BrasilAPI e estabelecendo conformidade com diretrizes de acessibilidade e testes de *software*.
 
 #### 2.1.1 OBJETIVOS ESPECÍFICOS
 
@@ -100,7 +100,7 @@ Desenvolver e integrar um módulo de CRM acessível ao painel administrativo da 
 
 ### 2.2 DELIMITAÇÃO DO PROBLEMA
 
-A evolução dos ecossistemas digitais impõe que as interfaces corporativas não apenas atraiam visitantes, mas também sustentem a conversão e o relacionamento contínuo com os clientes. Na rotina da PGAVCB, constatou-se que o avanço gerado pela implantação da landing page no ciclo anterior esbarrou em limitações no processamento interno das demandas: múltiplos colaboradores não dispunham de um ambiente unificado para acompanhar o status de orçamentos solicitados via WhatsApp, gerando desencontro de informações e risco concreto de perda de contratos com condomínios e estabelecimentos comerciais.
+A evolução dos ecossistemas digitais impõe que as interfaces corporativas não apenas atraiam visitantes, mas também sustentem a conversão e o relacionamento contínuo com os clientes. Na rotina da PGAVCB, constatou-se que o avanço gerado pela implantação da *landing page* no ciclo anterior esbarrou em limitações no processamento interno das demandas: múltiplos colaboradores não dispunham de um ambiente unificado para acompanhar o status de orçamentos solicitados via WhatsApp, gerando desencontro de informações e risco concreto de perda de contratos com condomínios e estabelecimentos comerciais.
 
 A esse fator soma-se a inexistência de integrações para validação e busca cadastral, exigindo que dados extensos de pessoas jurídicas fossem coletados e transcritos manualmente para os arquivos de vistoria técnica. O sistema também carecia de auditoria formal de acessibilidade e mecanismos automatizados de testes, requisitos imprescindíveis para a robustez de um sistema de informação. Em virtude desse diagnóstico de campo, estabeleceu-se a seguinte questão de pesquisa:
 
@@ -120,21 +120,21 @@ Quanto ao viés empresarial e gerencial, a ferramenta emancipa a gestão ao exti
 
 #### 2.2.4 RELEVÂNCIA ACADÊMICA
 
-No domínio acadêmico, o estudo justifica-se pela consolidação de competências em Engenharia de Software e Banco de Dados, evidenciando como técnicas full-stack e boas práticas de acessibilidade se articulam para solucionar demandas concretas de organizações produtivas.
+No domínio acadêmico, o estudo justifica-se pela consolidação de competências em Engenharia de *Software* e Banco de Dados, evidenciando como técnicas *full-stack* e boas práticas de acessibilidade se articulam para solucionar demandas concretas de organizações produtivas.
 
 #### 2.2.5 RELEVÂNCIA E CONTRIBUIÇÕES PARA O PROJETO LOCAL
 
 A principal contribuição proporcionada à empresa PGAVCB materializa-se na entrega de um ativo tecnológico proprietário, seguro e altamente escalável, desenvolvido sob medida para mitigar seus gargalos operacionais imediatos. Com a consolidação do módulo de CRM e o consumo automatizado de dados cadastrais via BrasilAPI, a organização supera a dependência de processos manuais e o risco de perda de contatos no atendimento fragmentado por mensagens instantâneas. A plataforma evolui de uma interface de atração inicial para um ambiente robusto de gestão de relacionamento, plenamente apto a qualificar a conversão de acessos em propostas comerciais estruturadas, mantendo o histórico unificado de cada processo de segurança contra incêndios.
 
-Para a comunidade externa e os municípios de Praia Grande e Peruíbe, o projeto fortalece diretamente a economia regional ao modernizar a capacidade operacional de uma empresa prestadora de serviços técnicos essenciais. A otimização do fluxo de atendimento e a celeridade no fornecimento de laudos de AVCB estimulam a regularização e a conformidade legal de estabelecimentos comerciais, industriais e condomínios habitacionais junto ao Corpo de Bombeiros. Dessa forma, a aplicação prática da engenharia de software atua não apenas como vetor de competitividade mercantil e transformação digital, mas como um mecanismo indispensável de salvaguarda do patrimônio edificado e de proteção à vida no Litoral Sul de São Paulo.
+Para a comunidade externa e os municípios de Praia Grande e Peruíbe, o projeto fortalece diretamente a economia regional ao modernizar a capacidade operacional de uma empresa prestadora de serviços técnicos essenciais. A otimização do fluxo de atendimento e a celeridade no fornecimento de laudos de AVCB estimulam a regularização e a conformidade legal de estabelecimentos comerciais, industriais e condomínios habitacionais junto ao Corpo de Bombeiros. Dessa forma, a aplicação prática da engenharia de *software* atua não apenas como vetor de competitividade mercantil e transformação digital, mas como um mecanismo indispensável de salvaguarda do patrimônio edificado e de proteção à vida no Litoral Sul de São Paulo.
 
 ### 2.3 FUNDAMENTAÇÃO TEÓRICA
 
-A construção de uma solução web exige a convergência entre metodologias de inovação, estratégias de marketing digital e technologies de alta performance. Esta seção fundamenta os pilares teóricos que sustentam o desenvolvimento do projeto.
+A construção de uma solução web exige a convergência entre metodologias de inovação, estratégias de *marketing* digital e technologies de alta performance. Esta seção fundamenta os pilares teóricos que sustentam o desenvolvimento do projeto.
 
 #### 2.3.1 O DESIGN THINKING NA SOLUÇÃO DE PROBLEMAS
 
-Os requisitos para utilização do módulo de CRM orientou-se pelos preceitos do Design Thinking, assegurando que as funcionalidades planejadas respondessem diretamente às fragilidades operacionais do negócio. Ao afastar-se de um modelo estritamente prescritivo de engenharia de software, a metodologia viabilizou uma dinâmica colaborativa contínua com os gestores da PG AVCB. Nesse processo, a experiência prática da empresa no setor de segurança contra incêndios somou-se às demandas dos clientes por um atendimento ágil, convertendo necessidades reais em diretrizes funcionais para o sistema. O valor dessa construção conjunta apoia-se no arcabouço teórico que concebe a abordagem como uma prática empática e compartilhada:
+Os requisitos para utilização do módulo de CRM orientou-se pelos preceitos do *Design Thinking*, assegurando que as funcionalidades planejadas respondessem diretamente às fragilidades operacionais do negócio. Ao afastar-se de um modelo estritamente prescritivo de engenharia de *software*, a metodologia viabilizou uma dinâmica colaborativa contínua com os gestores da PG AVCB. Nesse processo, a experiência prática da empresa no setor de segurança contra incêndios somou-se às demandas dos clientes por um atendimento ágil, convertendo necessidades reais em diretrizes funcionais para o sistema. O valor dessa construção conjunta apoia-se no arcabouço teórico que concebe a abordagem como uma prática empática e compartilhada:
 
 > "Design Thinking is a problem-solving approach and a human-centered innovation. It's a five step process: Observation, Ideation, Prototyping, Testing and Implementation. It puts people we design for at the center of the process and invites them to co-create solutions." (UNDP, 2014).
 
