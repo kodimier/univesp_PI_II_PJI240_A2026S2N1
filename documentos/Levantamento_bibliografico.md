@@ -162,3 +162,33 @@ THE A11Y PROJECT. The A11Y Project: a community-driven effort to make digital ac
 
 **Como este conceito ajuda a entender o problema e a propôr soluções**
 Complementa o guia oficial da WCAG com aplicações e abordagens de codificação diretas para que a equipe introduza melhores fluxos de interação na prototipagem das telas em Next.js.
+
+---
+
+12
+**Conceito (baseado em conhecimentos técnicos de um integrante - Nelson)**
+Normas técnicas para segurança contra incêndios
+
+**Referência bibliográfica (em formato ABNT)**
+SILVA, Paulo Henrique Fechine. A evolução da segurança contra incêndio no Brasil: dos princípios do fogo às soluções integradas em edificações. Revista Foco, v. 16, n. 8, 2023. DOI: 10.54751/revistafoco.v16n8-146
+
+**Importência do artigo para o projeto**
+O artigo aborda a evolução da segurança contra incêndios no Brasil e destaca prevenção, proteção ativa, proteção passiva e normas técnicas como essenciais
+
+
+---
+
+12
+**Conceito (baseado em conhecimentos técnicos de um integrante - Nelson)**
+regulamentação dos certificados de AVCB
+
+**Referência bibliográfica (em formato ABNT)**
+SÃO PAULO (Estado). Decreto nº 62.416, de 10 de janeiro de 2017. Regulamenta a Lei Complementar nº 1.257, de 6 de janeiro de 2015, que institui o Código Estadual de Proteção contra Incêndios e Emergências. São Paulo, 2017.
+
+**Importência do artigo para o projeto**
+Decreto estadual que regulamenta os certificados de AVCB
+
+---
+
+13
+SOMMERVILLE, Ian. Engenharia de Software. 10. ed. Pearson Education do Brasil, 2018.
