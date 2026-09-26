@@ -32,9 +32,9 @@ Implementação de Módulo CRM e Automação de Leads com Next.js e Firebase par
 
 ## RESUMO
 
-O presente trabalho documenta o desenvolvimento parcial de uma solução computacional evolutiva voltada à empresa PG AVCB, consultoria especializada em Engenharia de Segurança Contra Incêndios sediada no litoral sul paulista. A pesquisa origina-se do descompasso operacional ocasionado pelo aumento de demandas após o primeiro ciclo do projeto, resultando em sobrecarga na triagem de contatos via WhatsApp, ausência de compartilhamento do atendimento entre múltiplos operadores e lentidão no cadastramento manual de pessoas jurídicas e condomínios. O objetivo central compreende o desenvolvimento e o acoplamento de um módulo de CRM (Customer Relationship Management) acessível ao painel administrativo previamente construído, incorporando consumo automatizado de dados cadastrais via BrasilAPI, diretrizes de acessibilidade na web (WCAG/Lighthouse), suíte de testes de software e persistência em nuvem com Firebase. A metodologia estrutura-se nos preceitos do Design Thinking, perpassando as etapas de imersão, ideação e prototipagem contínua. Os resultados parciais comprovam a viabilidade estrutural do fluxo arquitetural concebido: a extensão dos esquemas do Firebase Firestore para suportar estágios de atendimento, a integração de rotas assíncronas no framework Next.js para consumo de APIs públicas e a aplicação de diretrizes de contraste e navegação por teclado. O versionamento colaborativo sob o GitHub e o emprego de testes automatizados garantem a confiabilidade e estabilidade necessárias para entregar uma ferramenta inclusiva e de alto rendimento corporativo.
+O presente trabalho documenta o desenvolvimento parcial de uma solução computacional evolutiva voltada à empresa PG AVCB, consultoria especializada em Engenharia de Segurança Contra Incêndios sediada no litoral sul paulista. A pesquisa origina-se do descompasso operacional ocasionado pelo aumento de demandas após o primeiro ciclo do projeto, resultando em sobrecarga na triagem de contatos via *WhatsApp*, ausência de compartilhamento do atendimento entre múltiplos operadores e lentidão no cadastramento manual de pessoas jurídicas e condomínios. O objetivo central compreende o desenvolvimento e o acoplamento de um módulo de CRM (*Customer Relationship Management*) acessível ao painel administrativo previamente construído, incorporando consumo automatizado de dados cadastrais via BrasilAPI, diretrizes de acessibilidade na web (WCAG/*Lighthouse*), suíte de testes de software e persistência em nuvem com *Firebase*. A metodologia estrutura-se nos preceitos do *Design Thinking*, perpassando as etapas de imersão, ideação e prototipagem contínua. Os resultados parciais comprovam a viabilidade estrutural do fluxo arquitetural concebido: a extensão dos esquemas do *Firebase Firestore* para suportar estágios de atendimento, a integração de rotas assíncronas no *framework* Next.js para consumo de APIs públicas e a aplicação de diretrizes de contraste e navegação por teclado. O versionamento colaborativo sob o GitHub e o emprego de testes automatizados garantem a confiabilidade e estabilidade necessárias para entregar uma ferramenta inclusiva e de alto rendimento corporativo.
 
-**PALAVRAS-CHAVE:** PG AVCB; CRM; Automação de Leads; BrasilAPI; Acessibilidade Web; Firebase; Next.js
+**PALAVRAS-CHAVE:** PG AVCB; CRM; Automação de *Leads*; BrasilAPI; Acessibilidade Web; *Firebase*; Next.js
 
 ## LISTA DE ILUSTRAÇÕES
 
@@ -55,11 +55,11 @@ FIGURA 3 - CRIAÇÃO DE REPOSITÓRIO GITHUB | 30
 2.2.4 RELEVÂNCIA ACADÊMICA | 9
 2.2.5 RELEVÂNCIA E CONTRIBUIÇÕES PARA O PROJETO LOCAL | 9
 2.3 FUNDAMENTAÇÃO TEÓRICA | 10
-2.3.1 O DESIGN THINKING NA SOLUÇÃO DE PROBLEMAS | 10
+2.3.1 O *DESIGN THINKING* NA SOLUÇÃO DE PROBLEMAS | 10
 2.3.2 ARQUITETURA REATIVA EM NEXT.JS E PERSISTÊNCIA EM NUVEM COM FIREBASE | 11
 2.3.3 CAMADA DE SERVIÇOS BACKEND COM FASTAPI | 14
-2.3.4 INTEGRAÇÃO DE APIS RESTFUL E AUTOMAÇÃO DE DADOS CADASTRAIS (BRASILAPI) | 16
-2.3.5 INTEGRAÇÃO COM A WHATSAPP CLOUD API | 18
+2.3.4 INTEGRAÇÃO DE APIS *RESTFUL* E AUTOMAÇÃO DE DADOS CADASTRAIS (BRASILAPI) | 16
+2.3.5 INTEGRAÇÃO COM A *WHATSAPP CLOUD API* | 18
 2.3.6 CONTROLE DE VERSÃO GITHUB | 20
 2.3.7 MÓDULO DE CRM | 22
 2.3.8 ACESSIBILIDADE DIGITAL (WCAG 2.1) E ENGENHARIA DA QUALIDADE DE SOFTWARE | 24
@@ -76,19 +76,19 @@ REFERÊNCIAS | 31
 ---
 ## 1 INTRODUÇÃO
 
-No segmento de Engenharia de Segurança Contra Incêndios, a emissão e a renovação de documentos regulatórios, tais como o Auto de Vistoria do Corpo de Bombeiros (AVCB) e o Certificado de Licença do Corpo de Bombeiros (CLCB) configuram serviços de alta especificidade técnica e rigor procedimental, demandando atendimento assertivo e gestão ágil de prazos legais. A empresa parceira PGAVCB, atuante nos municípios de Praia Grande e Peruíbe com abrangência em todo o litoral sul do Estado de São Paulo, concluiu exitosamente no ciclo anterior a implantação de uma infraestrutura web dinâmica com painel administrativo. Tal iniciativa superou o antigo déficit de exposição mercadológica e estabeleceu canais de captação digital integrados.
+No segmento de Engenharia de Segurança Contra Incêndios, a emissão e a renovação de documentos regulatórios, tais como o Auto de Vistoria do Corpo de Bombeiros (AVCB) e o Certificado de Licença do Corpo de Bombeiros (CLCB) configuram serviços de alta especificidade técnica e rigor procedimental (São Paulo, 2017), demandando atendimento assertivo e gestão ágil de prazos legais. A empresa parceira PGAVCB, atuante nos municípios de Praia Grande e Peruíbe com abrangência em todo o litoral sul do Estado de São Paulo, concluiu exitosamente no ciclo anterior a implantação de uma infraestrutura web dinâmica com painel administrativo. Tal iniciativa superou o antigo déficit de exposição mercadológica e estabeleceu canais de captação digital integrados.
 
-Contudo, a elevação no volume de acessos e a centralização dos contatos primários no aplicativo WhatsApp revelaram uma nova barreira operacional. A dinâmica de atendimento pulverizou-se em um único canal desprovido de ferramentas de gestão compartilhada, provocando lentidão nas respostas, conversas desordenadas e risco de perda de propostas comerciais de pessoas jurídicas. Paralelamente, o preenchimento dos dados cadastrais necessários para emissão de orçamentos e abertura de pastas técnicas (como razão social, CNPJ, logradouro e atividade econômica) permaneceu dependente de digitação manual, tornando o fluxo de trabalho burocrático e suscetível a erros de transcrição.
+Contudo, a elevação no volume de acessos e a centralização dos contatos primários no aplicativo *WhatsApp* revelaram uma nova barreira operacional. A dinâmica de atendimento pulverizou-se em um único canal desprovido de ferramentas de gestão compartilhada, provocando lentidão nas respostas, conversas desordenadas e risco de perda de propostas comerciais de pessoas jurídicas. Paralelamente, o preenchimento dos dados cadastrais necessários para emissão de orçamentos e abertura de pastas técnicas (como razão social, CNPJ, logradouro e atividade econômica) permaneceu dependente de digitação manual, tornando o fluxo de trabalho burocrático e suscetível a erros de transcrição.
 
-Diante deste panorama real de mercado, o objeto do presente projeto integrador consiste no projeto, desenvolvimento e integração de um módulo nativo de CRM (Customer Relationship Management) diretamente acoplado ao painel administrativo da empresa, amparado pelo framework Next.js e pela infraestrutura em nuvem do Google Firebase. O sistema incorpora o consumo automatizado de dados cadastrais públicos por meio da BrasilAPI, o atendimento a padrões rigorosos de acessibilidade web (WCAG 2.1) e uma rotina sistemática de testes e controle de versão profissional via GitHub.
+Diante deste panorama real de mercado, o objeto do presente projeto integrador consiste no projeto, desenvolvimento e integração de um módulo nativo de CRM (*Customer Relationship Management*) diretamente acoplado ao painel administrativo da empresa, amparado pelo framework Next.js e pela infraestrutura em nuvem do Google Firebase. O sistema incorpora o consumo automatizado de dados cadastrais públicos por meio da BrasilAPI, o atendimento a padrões rigorosos de acessibilidade web (WCAG 2.1) e uma rotina sistemática de testes e controle de versão profissional via GitHub.
 
-O estudo articula-se organicamente às disciplinas formativas dos cursos de Computação da UNIVESP. Disciplinas como Engenharia de Software, Desenvolvimento Web, Banco de Dados e Interação Humano-Computador fornecem o arcabouço conceitual para transformar necessidades operacionais em componentes de software reutilizáveis, seguros e acessíveis, demonstrando como a tecnologia aplicada mitiga gargalos organizacionais e potencializa a prestação de serviços essenciais à coletividade.
+O estudo articula-se diretamente às disciplinas formativas dos cursos de Computação da UNIVESP. Disciplinas como Engenharia de *Software*, Desenvolvimento Web, Banco de Dados e Interação Humano-Computador fornecem a estrutura conceitual para transformar necessidades operacionais em componentes de software reutilizáveis, seguros e acessíveis (Sommerville, 2018), demonstrando como a tecnologia aplicada mitiga obstáculos organizacionais e potencializa a prestação de serviços essenciais à coletividade.
 
 ## 2 DESENVOLVIMENTO
 
 ### 2.1 OBJETIVOS
 
-Desenvolver e integrar um módulo de CRM (Customer Relationship Management) acessível ao painel administrativo da empresa PGAVCB, fundamentado no framework Next.js e no banco de dados em nuvem Google Firebase, centralizando as demandas de atendimento, automatizando a consulta de dados cadastrais via BrasilAPI e estabelecendo conformidade com diretrizes de acessibilidade e testes de software.
+Desenvolver e integrar um módulo de CRM acessível ao painel administrativo da empresa PGAVCB, fundamentado no *framework* Next.js e no banco de dados em nuvem Google Firebase, centralizando as demandas de atendimento, automatizando a consulta de dados cadastrais via BrasilAPI e estabelecendo conformidade com diretrizes de acessibilidade e testes de software.
 
 #### 2.1.1 OBJETIVOS ESPECÍFICOS
 
