@@ -134,11 +134,27 @@ A construção de uma solução *web* exige a convergência entre metodologias d
 
 #### 2.3.1 O DESIGN THINKING NA SOLUÇÃO DE PROBLEMAS
 
-Os requisitos para utilização do módulo de CRM orientou-se pelos preceitos do *Design Thinking*, assegurando que as funcionalidades planejadas respondam diretamente aos obstáculos operacionais do negócio. Ao afastar-se de um modelo estritamente prescritivo de engenharia de *software*, a metodologia viabiliza uma dinâmica colaborativa contínua com os gestores da PG AVCB.Nesse sentido, Pereira e Russo (2018, p. 780) afirmam que "A utilização de uma abordagem de *Design Thinking* promove a comunicação entre as equipes de desenvolvimento de software e os clientes ao longo de todo o projeto de desenvolvimento de software." (tradução livre). Nesse processo, a experiência prática da empresa no setor de segurança contra incêndios soma-se às demandas dos clientes por um atendimento ágil, convertendo necessidades reais em diretrizes funcionais para o sistema. O valor dessa construção conjunta apoia-se na base teórica que concebe a abordagem como uma prática empática e compartilhada.
+Os requisitos para utilização do módulo de CRM orientam-se pelos preceitos do *Design Thinking*, assegurando que as funcionalidades planejadas respondam diretamente aos obstáculos operacionais do negócio. Ao afastar-se de um modelo estritamente prescritivo de engenharia de *software*, a metodologia viabiliza uma dinâmica colaborativa contínua com os gestores da PG AVCB.Nesse sentido, Pereira e Russo (2018, p. 780) afirmam que "A utilização de uma abordagem de *Design Thinking* promove a comunicação entre as equipes de desenvolvimento de software e os clientes ao longo de todo o projeto de desenvolvimento de software." (tradução livre). Nesse processo, a experiência prática da empresa no setor de segurança contra incêndios soma-se às demandas dos clientes por um atendimento ágil, convertendo necessidades reais em diretrizes funcionais para o sistema. O valor dessa construção conjunta apoia-se na base teórica que concebe a abordagem como uma prática empática e compartilhada.
 
 A condução do trabalho fundamentada na empatia e no diálogo contínuo com os parceiros externos está alinhada à concepção do *Design Thinking* como uma abordagem baseada em empatia, colaboração e participação, aproximando os envolvidos na identificação e compreensão das necessidades que orientam a solução (Martins et al., 2019), contribuindo para a entrega de um sistema de real utilidade socioeconômica. Essa orientação assegura que a modelagem da interface e as regras de negócio atendam com precisão aos obstáculos operacionais diagnosticados durante a fase exploratória da empresa.
 
-#### 2.3.2 ARQUITETURA REATIVA EM NEXT.JS E PERSISTÊNCIA EM NUVEM COM FIREBASE
+#### 2.3.2 MÓDULO DE CRM
+
+A gestão estratégica do relacionamento com o cliente ultrapassa a mera utilização de canais digitais de contato, demandando a estruturação de processos integrados que garantam a rastreabilidade e a perenidade das interações comerciais. O Customer Relationship Management (CRM) não deve ser concebido exclusivamente como uma ferramenta tecnológica ou um banco de dados transacional, mas como uma estratégia organizacional integrada que alinha tecnologia, pessoas e processos para mapear necessidades, personalizar o atendimento e elevar os níveis de fidelização e retenção de clientes.
+
+> O Customer Relationship Management não se resume a uma ferramenta tecnológica ou a um software isolado, configurando-se como uma estratégia de negócios voltada ao entendimento e à antecipação das necessidades dos clientes. Trata-se de uma abordagem holística que integra processos, pessoas e tecnologia para atrair e fidelizar o público, maximizando o valor do relacionamento ao longo do tempo. (ZENONE, 2019)
+
+Nesse sentido, a consolidação de uma plataforma de CRM visa mitigar a fragmentação comunicacional, estabelecendo uma visão unificada e contínua do ciclo de vida de cada consumidor na organização.
+
+No cenário diagnosticado na empresa PG AVCB, a expansão das demandas evidenciou a insuficiência de controles informais mantidos em dispositivos móveis individuais. A centralização dos atendimentos em conversas isoladas gerava lentidão no retorno, perda de histórico e riscos na formalização de propostas técnicas de regularização contra incêndios. A implementação de um módulo de CRM integrado responde a essa vulnerabilidade gerencial ao transformar mensagens esparsas em um funil corporativo estruturado:
+
+* **Centralização e Rastreabilidade do Histórico:** Cada solicitação de orçamento de AVCB passa a ser registrada em um repositório centralizado em nuvem, garantindo que múltiplos operadores acessem os antecedentes da negociação sem perda de contexto operacional.
+* **Qualificação e Segmentação de Leads:** O módulo categoriza os estágios de atendimento (triagem inicial, proposta em elaboração, laudo emitido), permitindo à administração acompanhar gargalos na conversão de novos clientes corporativos e condomínios.
+* **Mitigação do Descompasso Operacional:** A automatização de etapas de cadastro aliada à visão sistêmica do relacionamento reduz o retrabalho manual de digitação, permitindo que a equipe corporativa dedique maior tempo à consultoria técnica preventiva e ao cumprimento de prazos legais.
+
+Dessa forma, o módulo de CRM atua como o elo estruturante que converte o tráfego gerado pela presença digital da empresa em ativos relacionais e econômicos consistentes, assegurando eficiência operacional, suporte à tomada de decisões gerenciais e excelência na prestação de serviços de segurança contra incêndios no Litoral Sul.
+
+#### 2.3.3 ARQUITETURA REATIVA EM NEXT.JS E PERSISTÊNCIA EM NUVEM COM FIREBASE
 
 A construção de um painel de gestão de leads demanda interfaces reativas com rápido tempo de carregamento e manipulação assíncrona de estado. Conforme apontam Mokoginta, Putri e Wattimena (2024).
 
@@ -172,7 +188,7 @@ Em conformidade com as boas práticas de segurança da informação, a chave de 
 
 A plataforma Google Firebase oferta solução para perda de oportunidades comerciais ao transformar conversas isoladas em registros auditáveis. A gestão da empresa PG AVCB ganha autonomia para acompanhar a esteira de atendimento em tempo real, desde o primeiro contato do cliente até a tramitação conclusiva dos laudos junto ao Corpo de Bombeiros.
 
-#### 2.3.3 CAMADA DE SERVIÇOS BACKEND COM FASTAPI
+#### 2.3.4 CAMADA DE SERVIÇOS BACKEND COM FASTAPI
 
 O FastAPI configura-se como um framework assíncrono em linguagem Python projetado para a construção de interfaces de programação de aplicações (APIs) de alto desempenho fundamentadas nos padrões RESTful e no protocolo HTTP. A ferramenta destaca-se pelo suporte nativo à tipagem estática, documentação interativa automatizada e serialização rigorosa de dados de entrada e saída. No projeto em desenvolvimento, o FastAPI atua como a camada intermediária de retaguarda (backend), operando como a ponte de comunicação e isolamento entre a interface de usuário (Next.js), o banco de dados em nuvem (Google Firebase), o serviço de validação cadastral (BrasilAPI) e a integração de mensagens instantâneas do WhatsApp.
 
@@ -192,7 +208,7 @@ A implementação das rotas no backend estrutura-se para assegurar tráfego ass�
 
 A opção pela utilização pela camada FastAPI emancipa a infraestrutura tecnológica da PG AVCB. A captação de clientes deixa de ser uma mera vitrine estática e converte-se em um fluxo transacional robusto, no qual solicitações de propostas e dados de vistoria técnica são processados de forma estável, segura e simultânea para múltiplos colaboradores. Adicionalmente, a equipe de desenvolvimento de interface obtém liberdade para evoluir e refinar os componentes visuais do CRM com conformidade de acessibilidade (WCAG 2.1) sem a necessidade de reescrever chamadas a bancos ou serviços externos a cada nova tela concebida.
 
-#### 2.3.4 INTEGRAÇÃO DE APIS RESTFUL E AUTOMAÇÃO DE DADOS CADASTRAIS (BRASILAPI)
+#### 2.3.5 INTEGRAÇÃO DE APIS RESTFUL E AUTOMAÇÃO DE DADOS CADASTRAIS (BRASILAPI)
 
 A eficiência em sistemas modernos assenta-se na capacidade de interoperabilidade por meio de serviços padronizados. Conforme Masse (2012), as APIs RESTful estabelecem interfaces padronizadas orientadas a recursos que operam sobre os métodos e protocolos da web, permitindo que aplicações distintas troquem informações de forma segura e desacoplada em formato JSON.
 
@@ -215,7 +231,7 @@ Para mitigar exposições de segurança e assegurar tolerância a falhas, a cons
 
 A automação cadastral reduz o tempo de qualificação e abertura de pastas técnicas de minutos para segundos, eliminando o retrabalho de transcrição de dados e permitindo que os colaboradores concentrem seus esforços no atendimento consultivo aos clientes. Concomitantemente, mitiga-se a taxa de desistência nos canais de contato e estabelece-se um histórico comercial confiável e unificado no painel da PGAVCB.
 
-#### 2.3.5 INTEGRAÇÃO COM A WHATSAPP CLOUD API
+#### 2.3.6 INTEGRAÇÃO COM A WHATSAPP CLOUD API
 
 O canal oficial de mensagens instantâneas da PG AVCB representa a principal via de captação de clientes da empresa. No Projeto Integrador II - Implementação de Módulo CRM e Automação de Leads com Next.js e Firebase para a empresa PGAVCB, a incorporação desse canal estrutura-se por meio da WhatsApp Business Cloud API (interface oficial mantida pela Meta), operando via recepção assíncrona de eventos (*webhooks*) direcionados à camada de backend. Essa arquitetura viabiliza que múltiplos operadores compartilhem o mesmo número telefônico corporativo a partir de terminais *web* distintos, superando a dependência de um dispositivo móvel físico exclusivo. Rejeita-se categoricamente a utilização de bibliotecas não oficiais de automação de interface, escolha que assegura a conformidade estrita aos termos de serviço da plataforma, a conformidade jurídica à Lei Geral de Proteção de Dados (LGPD).
 
@@ -238,7 +254,7 @@ Evidenciam-se, a seguir, os principais impactos técnicos e as diretrizes de gov
 
 A transição para um atendimento centralizado elimina o risco de extravio de propostas e assegura celeridade no atendimento de estabelecimentos e condomínios que demandam regularização contra incêndios no Litoral Sul. A administração e a equipe técnica da PGAVCB passam a operar em paralelo, com distribuição ordenada de carga de trabalho e rastreabilidade total de cada vistoria, integrando a atração digital pública e a captação direta em um funil corporativo unificado.
 
-#### 2.3.6 CONTROLE DE VERSÃO GITHUB
+#### 2.3.7 CONTROLE DE VERSÃO GITHUB
 
 O Git atua como o sistema distribuído de controle de versões empregado para gerenciar o ciclo de vida do código-fonte do projeto, enquanto a plataforma remota GitHub, por meio do repositório oficial `https://github.com/kodimier/univesp_PI_II_PJI240_A2026S2N1` consolida o ambiente colaborativo de desenvolvimento do grupo. A garantia da qualidade do artefato apoia-se na execução sistemática de testes automatizados, estruturados com o framework Pytest no backend e com Jest no frontend, integrados a rotinas de integração contínua via GitHub Actions.
 
@@ -261,21 +277,6 @@ O gerenciamento do repositório adota um fluxo estruturado de trabalho cooperati
 
 Para a PG AVCB, a governança de código entrega um ativo tecnológico modular, reprodutível e documentado, possibilitando que novos colaboradores executem, testem e publiquem a aplicação de maneira padronizada, eliminando divergências de ambiente e mitigando vulnerabilidades antes da homologação final do protótipo.
 
-#### 2.3.7 MÓDULO DE CRM
-
-A gestão estratégica do relacionamento com o cliente ultrapassa a mera utilização de canais digitais de contato, demandando a estruturação de processos integrados que garantam a rastreabilidade e a perenidade das interações comerciais. O Customer Relationship Management (CRM) não deve ser concebido exclusivamente como uma ferramenta tecnológica ou um banco de dados transacional, mas como uma estratégia organizacional integrada que alinha tecnologia, pessoas e processos para mapear necessidades, personalizar o atendimento e elevar os níveis de fidelização e retenção de clientes.
-
-> O Customer Relationship Management não se resume a uma ferramenta tecnológica ou a um software isolado, configurando-se como uma estratégia de negócios voltada ao entendimento e à antecipação das necessidades dos clientes. Trata-se de uma abordagem holística que integra processos, pessoas e tecnologia para atrair e fidelizar o público, maximizando o valor do relacionamento ao longo do tempo. (ZENONE, 2019)
-
-Nesse sentido, a consolidação de uma plataforma de CRM visa mitigar a fragmentação comunicacional, estabelecendo uma visão unificada e contínua do ciclo de vida de cada consumidor na organização.
-
-No cenário diagnosticado na empresa PG AVCB, a expansão das demandas evidenciou a insuficiência de controles informais mantidos em dispositivos móveis individuais. A centralização dos atendimentos em conversas isoladas gerava lentidão no retorno, perda de histórico e riscos na formalização de propostas técnicas de regularização contra incêndios. A implementação de um módulo de CRM integrado responde a essa vulnerabilidade gerencial ao transformar mensagens esparsas em um funil corporativo estruturado:
-
-* **Centralização e Rastreabilidade do Histórico:** Cada solicitação de orçamento de AVCB passa a ser registrada em um repositório centralizado em nuvem, garantindo que múltiplos operadores acessem os antecedentes da negociação sem perda de contexto operacional.
-* **Qualificação e Segmentação de Leads:** O módulo categoriza os estágios de atendimento (triagem inicial, proposta em elaboração, laudo emitido), permitindo à administração acompanhar gargalos na conversão de novos clientes corporativos e condomínios.
-* **Mitigação do Descompasso Operacional:** A automatização de etapas de cadastro aliada à visão sistêmica do relacionamento reduz o retrabalho manual de digitação, permitindo que a equipe corporativa dedique maior tempo à consultoria técnica preventiva e ao cumprimento de prazos legais.
-
-Dessa forma, o módulo de CRM atua como o elo estruturante que converte o tráfego gerado pela presença digital da empresa em ativos relacionais e econômicos consistentes, assegurando eficiência operacional, suporte à tomada de decisões gerenciais e excelência na prestação de serviços de segurança contra incêndios no Litoral Sul.
 
 #### 2.3.8 ACESSIBILIDADE DIGITAL (WCAG 2.1) E ENGENHARIA DA QUALIDADE DE SOFTWARE
 

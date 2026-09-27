@@ -165,18 +165,6 @@ Complementa o guia oficial da WCAG com aplicações e abordagens de codificaçã
 
 ---
 
-12
-**Conceito (baseado em conhecimentos técnicos de um integrante - Nelson)**
-Normas técnicas para segurança contra incêndios
-
-**Referência bibliográfica (em formato ABNT)**
-SILVA, Paulo Henrique Fechine. A evolução da segurança contra incêndio no Brasil: dos princípios do fogo às soluções integradas em edificações. Revista Foco, v. 16, n. 8, 2023. DOI: 10.54751/revistafoco.v16n8-146
-
-**Importência do artigo para o projeto**
-O artigo aborda a evolução da segurança contra incêndios no Brasil e destaca prevenção, proteção ativa, proteção passiva e normas técnicas como essenciais
-
-
----
 
 12
 **Conceito (baseado em conhecimentos técnicos de um integrante - Nelson)**
@@ -192,3 +180,15 @@ Decreto estadual que regulamenta os certificados de AVCB
 
 13
 SOMMERVILLE, Ian. Engenharia de Software. 10. ed. Pearson Education do Brasil, 2018.
+
+
+---
+
+14
+PEREIRA, Julio Cesar; RUSSO, Rosaria de F. S. M. Design Thinking Integrated in Agile Software Development: A Systematic Literature Review. Procedia Computer Science, v. 138, p. 775–782, 2018.
+
+---
+
+15
+
+MARTINS, Hugo Ferreira et al. Design Thinking: Challenges for Software Requirements Elicitation. Information, v. 10, n. 12, 371, 2019.
