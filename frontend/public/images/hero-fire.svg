@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
+  <title id="title">Extintor e mangueira</title>
+  <desc id="desc">Ilustração de extintor e mangueira em ambiente de segurança contra incêndio.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#081a29"/>
+      <stop offset="100%" stop-color="#102c42"/>
+    </linearGradient>
+    <linearGradient id="metal" x1="0" x2="1">
+      <stop offset="0%" stop-color="#e5edf5"/>
+      <stop offset="100%" stop-color="#b0c3d5"/>
+    </linearGradient>
+    <linearGradient id="red" x1="0" x2="1">
+      <stop offset="0%" stop-color="#f15a4a"/>
+      <stop offset="100%" stop-color="#d82d2d"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" x2="1">
+      <stop offset="0%" stop-color="#f8d67a"/>
+      <stop offset="100%" stop-color="#e7b94d"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="900" fill="url(#bg)"/>
+  <circle cx="930" cy="170" r="120" fill="#f5c75a" opacity="0.12"/>
+  <circle cx="250" cy="680" r="180" fill="#c92128" opacity="0.1"/>
+
+  <g transform="translate(170,140)">
+    <ellipse cx="440" cy="520" rx="420" ry="90" fill="#0d2339" opacity="0.5"/>
+
+    <g transform="translate(120,70)">
+      <rect x="0" y="110" width="130" height="260" rx="24" fill="url(#metal)"/>
+      <rect x="18" y="90" width="94" height="44" rx="10" fill="#dfeaf5"/>
+      <rect x="28" y="0" width="74" height="94" rx="12" fill="url(#gold)"/>
+      <rect x="38" y="18" width="54" height="40" rx="10" fill="#f7ecbf"/>
+      <circle cx="65" cy="145" r="36" fill="#f5f7fa" stroke="#8ea7bf" stroke-width="10"/>
+      <circle cx="65" cy="145" r="18" fill="#d8e2ec"/>
+      <path d="M37 218h56v95H37z" fill="#f5f7fa" opacity="0.8"/>
+      <rect x="80" y="250" width="115" height="18" rx="9" fill="#d5dfe9"/>
+      <rect x="190" y="240" width="130" height="34" rx="20" fill="url(#red)"/>
+      <path d="M325 255h88l28 96H325z" fill="#dfeaf5"/>
+      <path d="M620 255h90l24 110h-138z" fill="#dfeaf5"/>
+      <path d="M410 270c58 0 105 16 132 64 15 26 30 52 64 68 56 26 112 28 156 28s92-8 150-30" fill="none" stroke="#dfeaf5" stroke-width="18" stroke-linecap="round"/>
+      <path d="M486 400c58 18 140 10 180-12" fill="none" stroke="#f5c75a" stroke-width="12" stroke-linecap="round"/>
+    </g>
+
+    <g transform="translate(500,230)">
+      <rect x="0" y="150" width="240" height="32" rx="16" fill="#dfeaf5"/>
+      <path d="M32 180v92c0 40 32 72 72 72h72c42 0 76-32 76-72v-92H32z" fill="#f3f7fb"/>
+      <path d="M76 180V78c0-28 22-50 50-50h30c29 0 52 22 52 50v102H76z" fill="url(#metal)"/>
+      <path d="M120 180V82h28v98h-28z" fill="#dfeaf5" opacity="0.8"/>
+      <path d="M96 70l52-20 52 20" fill="none" stroke="#f5c75a" stroke-width="10" stroke-linecap="round"/>
+      <circle cx="118" cy="230" r="60" fill="#f5c75a" opacity="0.18"/>
+    </g>
+  </g>
+</svg>

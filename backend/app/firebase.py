@@ -5,6 +5,12 @@ from firebase_admin import credentials, firestore
 _db = None
 
 
+def reset_db():
+    """Libera o cliente em cache (usado pelos testes)."""
+    global _db
+    _db = None
+
+
 def get_db():
     global _db
     if _db is None:

@@ -13,8 +13,12 @@ ehthumbs.db
 Desktop.ini
 *~
 
+# Node (dependências locais; não versionar)
+node_modules/
+
 # Editors / IDEs
 .idea/
+.cursor/
 *.swp
 *.swo
 .project
