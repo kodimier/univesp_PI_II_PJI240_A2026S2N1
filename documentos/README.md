@@ -26,3 +26,7 @@ Sugestão de organização (os autores de cada arquivo commitam com o próprio u
 Cada ficha deve deixar explícito: **o que é a tecnologia**, **por que foi escolhida**, **como será usada**, **qual o impacto técnico** e **qual o ganho para a PGAVCB**.
 
 Relatório parcial, relatório final, autorizações e demais `.docx` do AVA também podem ser versionados nesta pasta por quem o Plano de Ação indicar como responsável pela entrega.
+
+## Versões anteriores
+
+A subpasta `legados/` guarda versões antigas dos documentos (PDFs e `.docx` gerados antes das últimas revisões e cópias duplicadas). As versões vigentes ficam na raiz de `documentos/`.
