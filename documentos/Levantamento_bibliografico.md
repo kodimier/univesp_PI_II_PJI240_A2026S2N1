@@ -192,3 +192,55 @@ PEREIRA, Julio Cesar; RUSSO, Rosaria de F. S. M. Design Thinking Integrated in A
 15
 
 MARTINS, Hugo Ferreira et al. Design Thinking: Challenges for Software Requirements Elicitation. Information, v. 10, n. 12, 371, 2019.
+
+---
+
+16
+FOWLER, Martin.Patterns of enterprise application architecture. Boston: Addison-Wesley, 2002
+
+---
+
+17
+FastAPI. FastAPI Documentation. Disponível em: <https://fastapi.tiangolo.com/>. Acesso em: 29 set. 2026
+
+---
+
+18
+SORDI, José Osvaldo de; MEIRELES, Manuel. Administração de sistemas de informação. 2. ed. São Paulo: Saraiva Uni, 2019
+
+---
+
+19
+
+Pytest. Pytest Documentation. Disponível em: <https://docs.pytest.org/en/stable/explanation/fixtures.html>. Acesso em: 29 set. 2026
+---
+
+20
+
+ALBERTIN, Alberto Luiz; ALBERTIN, Rosa Maria de Moura. Benefícios do uso de tecnologia de informação para o desempenho empresarial. Revista de Administração Pública, Rio de Janeiro, v. 42, n. 2, p. 275–302, 2008
+
+
+---
+
+21
+XAVIER, Raquel Oliveira; DORNELAS, Jairo Simião. O papel do gerente num contexto de mudança baseada no uso da tecnologia CRM. Revista de Administração Contemporânea, Curitiba, v. 10, n. 1, p. 9–30, 2006.
+
+---
+
+22
+AZEVÊDO, Livyson Saymon Leão; SILVA, Rafael Bezerra Correia da. A importância da engenharia de testes para a garantia da qualidade de software. Revista Eletrônica Científica Inovação e Tecnologia, v. 6, n. 14, 2015.
+---
+
+23
+W3C BRASIL. Cartilha de acessibilidade na Web: fascículo IV — tornando o conteúdo Web acessível. São Paulo: W3C Brasil, [s.d.].
+---
+
+24
+BACH, Catharine F.; FERREIRA, Simone Bacellar Leal; SILVEIRA, Denis S.; NUNES, Ricardo Rodrigues. Diretrizes de acessibilidade: uma abordagem comparativa entre WCAG e e-MAG. Revista Eletrônica de Sistemas de Informação, v. 8, n. 1, 2009.
+---
+
+25
+
+---
+
+26
