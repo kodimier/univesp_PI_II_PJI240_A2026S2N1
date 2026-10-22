@@ -25,6 +25,30 @@ A solução resolve os gargalos operacionais no atendimento via WhatsApp, permit
 
 ---
 
+## 🖼 Telas do Painel Administrativo (CRM)
+
+### Multiatendimento WhatsApp
+Fila de conversas com filtro por status e atribuição de operador.
+
+![Multiatendimento WhatsApp](documentos/telas/crm-chat.png)
+
+### Gestão de Leads
+Pipeline de leads com busca, filtros por status/origem e atualização de etapa.
+
+![Gestão de Leads](documentos/telas/crm-leads.png)
+
+### Atendentes
+Cadastro e gestão da equipe de operadores.
+
+![Atendentes](documentos/telas/crm-attendants.png)
+
+### Conteúdo do Site
+Edição dos textos de marca, hero, sobre e contato da landing page.
+
+![Conteúdo do Site](documentos/telas/crm-content.png)
+
+---
+
 ## 🛠 Arquitetura e Tecnologias
 
 | Componente | Tecnologia |

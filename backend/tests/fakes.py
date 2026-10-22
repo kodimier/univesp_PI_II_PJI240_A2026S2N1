@@ -28,6 +28,9 @@ class FakeDocument:
         data = self._store.get(self._collection, {}).get(self.id)
         return FakeSnapshot(self.id, data)
 
+    def delete(self):
+        self._store.get(self._collection, {}).pop(self.id, None)
+
 
 class FakeCollection:
     def __init__(self, store, name):
