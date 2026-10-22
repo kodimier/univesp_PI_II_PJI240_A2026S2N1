@@ -136,7 +136,7 @@ A construção de uma solução *web* exige a convergência entre metodologias d
 
 #### 2.3.1 O DESIGN THINKING NA SOLUÇÃO DE PROBLEMAS
 
-Os requisitos para utilização do módulo de CRM orientam-se pelos preceitos do *Design Thinking*, assegurando que as funcionalidades planejadas respondam diretamente aos obstáculos operacionais do negócio. Ao afastar-se de um modelo estritamente prescritivo de engenharia de *software*, a metodologia viabiliza uma dinâmica colaborativa contínua com os gestores da PG AVCB.Nesse sentido, Pereira e Russo (2018, p. 780) afirmam que:
+s requisitos para utilização do módulo de CRM orientam-se pelos preceitos do *Design Thinking*, assegurando que as funcionalidades planejadas respondam diretamente aos obstáculos operacionais do negócio. Ao afastar-se de um modelo estritamente prescritivo de engenharia de *software*, a metodologia viabiliza uma dinâmica colaborativa contínua com os gestores da PG AVCB.Nesse sentido, Pereira e Russo (2018, p. 780) afirmam que:
 
 >"A utilização de uma abordagem de *Design Thinking* promove a comunicação entre as equipes de desenvolvimento de software e os clientes ao longo de todo o projeto de desenvolvimento de software." (tradução livre). 
 
