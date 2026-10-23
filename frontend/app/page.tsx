@@ -16,7 +16,8 @@ import {
 import { useEffect, useMemo, useState } from "react";
 import { getServices, getAssets, assetsByCategory, type Service, type Asset } from "@/lib/api";
 import { ContactForm } from "./contact-form";
-import { defaultSiteContent, getSiteContent, type SiteContent } from "@/lib/site-content";
+import { defaultSiteContent, type SiteContent } from "@/lib/site-content";
+import { loadSiteContent } from "@/lib/crm-api";
 
 const nav = [
   { href: "#sobre", label: "Sobre", icon: Info },
@@ -25,11 +26,13 @@ const nav = [
 ];
 
 export default function Home() {
-  const [content] = useState<SiteContent>(() => getSiteContent());
+  const [content, setContent] = useState<SiteContent>(defaultSiteContent);
   const [services, setServices] = useState<Service[]>([]);
   const [assets, setAssets] = useState<Asset[]>([]);
 
   useEffect(() => {
+    loadSiteContent().then(setContent);
+
     getServices()
       .then((data) => setServices(data))
       .catch(() => setServices(defaultSiteContent.services));

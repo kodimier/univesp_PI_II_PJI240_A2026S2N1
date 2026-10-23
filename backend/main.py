@@ -5,7 +5,16 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from dotenv import load_dotenv
 from app.firebase import get_db
-from app.routers import assets, attendants, cnpj, contact, leads, services, whatsapp
+from app.routers import (
+    assets,
+    attendants,
+    cnpj,
+    contact,
+    leads,
+    services,
+    site_content,
+    whatsapp,
+)
 
 load_dotenv()
 
@@ -37,6 +46,7 @@ app.include_router(leads.router, prefix="/api")
 app.include_router(attendants.router, prefix="/api")
 app.include_router(cnpj.router, prefix="/api")
 app.include_router(whatsapp.router, prefix="/api")
+app.include_router(site_content.router, prefix="/api")
 
 
 @app.get("/api/health", tags=["Health"])

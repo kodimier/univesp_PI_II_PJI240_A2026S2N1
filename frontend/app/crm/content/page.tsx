@@ -1,18 +1,35 @@
 ﻿"use client";
 
-import { useState } from "react";
-import {
-  getSiteContent,
-  saveSiteContent,
-  type SiteContent,
-} from "@/lib/site-content";
+import { useEffect, useState } from "react";
+import { defaultSiteContent, type SiteContent } from "@/lib/site-content";
+import { loadSiteContent, publishSiteContent } from "@/lib/crm-api";
+import { isMockMode } from "@/lib/mock-mode";
 
 export default function SiteContentPage() {
-  const [content, setContent] = useState<SiteContent>(() => getSiteContent());
+  const [content, setContent] = useState<SiteContent>(defaultSiteContent);
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
 
-  const save = () => {
-    saveSiteContent(content);
-    alert("Conteúdo do site salvo no navegador. O layout público será atualizado ao recarregar a página.");
+  useEffect(() => {
+    loadSiteContent()
+      .then(setContent)
+      .finally(() => setLoading(false));
+  }, []);
+
+  const save = async () => {
+    setSaving(true);
+    try {
+      await publishSiteContent(content);
+      alert(
+        isMockMode()
+          ? "Modo demonstração: alterações salvas só neste navegador."
+          : "Conteúdo publicado. O site já exibe os novos textos."
+      );
+    } catch (err) {
+      alert(err instanceof Error ? err.message : "Erro ao publicar o conteúdo.");
+    } finally {
+      setSaving(false);
+    }
   };
 
   return (
@@ -26,9 +43,10 @@ export default function SiteContentPage() {
             </div>
             <button
               onClick={save}
-              className="rounded-xl bg-[#f5c75a] px-5 py-3 text-sm font-bold text-[#081a29] shadow-[0_12px_25px_rgba(245,199,90,0.35)] transition hover:bg-[#ffd978]"
+              disabled={loading || saving}
+              className="rounded-xl bg-[#f5c75a] px-5 py-3 text-sm font-bold text-[#081a29] shadow-[0_12px_25px_rgba(245,199,90,0.35)] transition hover:bg-[#ffd978] disabled:opacity-60"
             >
-              Salvar alterações
+              {saving ? "Publicando..." : "Salvar alterações"}
             </button>
           </div>
         </div>

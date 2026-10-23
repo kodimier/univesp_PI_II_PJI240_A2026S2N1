@@ -17,6 +17,13 @@ import {
   MOCK_MESSAGES,
 } from "./mock-data";
 import { isMockMode, MOCK_FALLBACK } from "./mock-mode";
+import {
+  defaultSiteContent,
+  getSiteContent,
+  mergeSiteContent,
+  saveSiteContent,
+  type SiteContent,
+} from "./site-content";
 
 export const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
 
@@ -343,6 +350,33 @@ export const deleteAttendant = async (attendantId: string): Promise<void> => {
 
   await request<void>(`/api/attendants/${attendantId}`, {
     method: "DELETE",
+  });
+};
+
+// ==================== Conteúdo do site ====================
+
+/**
+ * Textos da landing publicados pelo CRM. Sem conteúdo publicado ou sem backend,
+ * usa os textos padrão (em dev, também o rascunho salvo no navegador).
+ */
+export const loadSiteContent = async (): Promise<SiteContent> => {
+  if (isMockMode()) return getSiteContent();
+  try {
+    return mergeSiteContent(await request<Partial<SiteContent>>("/api/site-content"));
+  } catch {
+    return MOCK_FALLBACK ? getSiteContent() : defaultSiteContent;
+  }
+};
+
+/** Publica os textos da landing. No modo demo, salva só neste navegador. */
+export const publishSiteContent = async (content: SiteContent): Promise<void> => {
+  if (isMockMode()) {
+    saveSiteContent(content);
+    return;
+  }
+  await request<SiteContent>("/api/site-content", {
+    method: "PUT",
+    body: JSON.stringify(content),
   });
 };
 
