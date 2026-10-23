@@ -1,3 +1,6 @@
+import hashlib
+import hmac
+import json
 from unittest.mock import patch
 
 from app.models.company import Company
@@ -158,3 +161,29 @@ def test_reply_fails_when_graph_api_errors(mock_post, client, monkeypatch):
         json={"body": "falha"},
     )
     assert r.status_code == 502
+
+
+def _signed(body: bytes, secret: str) -> dict:
+    digest = hmac.new(secret.encode(), body, hashlib.sha256).hexdigest()
+    return {"X-Hub-Signature-256": f"sha256={digest}", "Content-Type": "application/json"}
+
+
+def test_webhook_accepts_valid_signature(client, monkeypatch):
+    monkeypatch.setenv("WHATSAPP_APP_SECRET", "segredo-meta")
+    body = json.dumps(INBOUND).encode()
+    r = client.post(
+        "/api/whatsapp/webhook", content=body, headers=_signed(body, "segredo-meta")
+    )
+    assert r.status_code == 200
+    assert r.json()["processed"] == 1
+
+
+def test_webhook_rejects_missing_or_wrong_signature(client, monkeypatch):
+    monkeypatch.setenv("WHATSAPP_APP_SECRET", "segredo-meta")
+    body = json.dumps(INBOUND).encode()
+    assert client.post("/api/whatsapp/webhook", json=INBOUND).status_code == 403
+    wrong = client.post(
+        "/api/whatsapp/webhook", content=body, headers=_signed(body, "outro-segredo")
+    )
+    assert wrong.status_code == 403
+    assert client.get("/api/whatsapp/conversations").json() == []

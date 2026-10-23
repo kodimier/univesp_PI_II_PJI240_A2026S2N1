@@ -49,6 +49,7 @@ const STATUS_CONFIG: Record<
 export default function LeadsPage() {
   const [leads, setLeads] = useState<Lead[]>([]);
   const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState<string | null>(null);
   const [statusFilter, setStatusFilter] = useState<string>("todos");
   const [originFilter, setOriginFilter] = useState<string>("todos");
   const [searchTerm, setSearchTerm] = useState("");
@@ -58,8 +59,10 @@ export default function LeadsPage() {
     try {
       const data = await listLeads();
       setLeads(data);
+      setLoadError(null);
     } catch (err) {
       console.error("Erro ao listar leads:", err);
+      setLoadError(err instanceof Error ? err.message : "Erro ao carregar leads.");
     } finally {
       setLoading(false);
     }
@@ -158,6 +161,8 @@ export default function LeadsPage() {
           <div className="text-center text-slate-500 py-16 animate-pulse">
             Carregando leads...
           </div>
+        ) : loadError ? (
+          <div className="text-center text-red-300 py-16">⚠️ {loadError}</div>
         ) : filteredLeads.length === 0 ? (
           <div className="text-center text-slate-500 py-16">
             Nenhum lead encontrado com os filtros selecionados.

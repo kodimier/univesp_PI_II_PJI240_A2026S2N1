@@ -1,4 +1,5 @@
-import { API_URL, USE_MOCKS } from "./api";
+import { API_URL } from "./api";
+import { isMockMode, MOCK_FALLBACK } from "./mock-mode";
 import { MOCK_CNPJ_DATA, MOCK_CONVERSATIONS, MOCK_LEADS } from "./mock-data";
 
 export type LeadStatus =
@@ -74,7 +75,7 @@ export async function sendContact(payload: {
   phone?: string;
   message: string;
 }): Promise<{ id: string; message: string }> {
-  if (USE_MOCKS) {
+  if (isMockMode()) {
     return {
       id: `contact-${Date.now()}`,
       message: "Mensagem enviada com sucesso (Simulação).",
@@ -100,21 +101,22 @@ export async function sendContact(payload: {
 }
 
 export const listLeads = async (status?: LeadStatus, origin?: LeadOrigin): Promise<Lead[]> => {
-  if (USE_MOCKS) return MOCK_LEADS as unknown as Lead[];
+  if (isMockMode()) return MOCK_LEADS as unknown as Lead[];
   const query = new URLSearchParams();
   if (status) query.set("status", status);
   if (origin) query.set("origin", origin);
   const suffix = query.toString() ? `?${query}` : "";
   try {
     return await crmFetch<Lead[]>(`/api/leads${suffix}`);
-  } catch {
+  } catch (e) {
+    if (!MOCK_FALLBACK) throw e;
     return MOCK_LEADS as unknown as Lead[];
   }
 };
 
 export const lookupCnpj = async (cnpj: string): Promise<Company> => {
   const clean = cnpj.replace(/\D/g, "");
-  if (USE_MOCKS) {
+  if (isMockMode()) {
     const mock = MOCK_CNPJ_DATA[clean] || {
       cnpj,
       razao_social: "EMPRESA SIMULADA MOCK LTDA",
@@ -127,7 +129,8 @@ export const lookupCnpj = async (cnpj: string): Promise<Company> => {
   }
   try {
     return await crmFetch<Company>(`/api/cnpj/${clean}`);
-  } catch {
+  } catch (e) {
+    if (!MOCK_FALLBACK) throw e;
     const mock = MOCK_CNPJ_DATA[clean] || {
       cnpj,
       razao_social: "EMPRESA SIMULADA MOCK LTDA",
@@ -141,10 +144,11 @@ export const lookupCnpj = async (cnpj: string): Promise<Company> => {
 };
 
 export const listQueue = async (): Promise<Conversation[]> => {
-  if (USE_MOCKS) return MOCK_CONVERSATIONS as unknown as Conversation[];
+  if (isMockMode()) return MOCK_CONVERSATIONS as unknown as Conversation[];
   try {
     return await crmFetch<Conversation[]>("/api/whatsapp/conversations");
-  } catch {
+  } catch (e) {
+    if (!MOCK_FALLBACK) throw e;
     return MOCK_CONVERSATIONS as unknown as Conversation[];
   }
 };

@@ -11,13 +11,16 @@ export default function AttendantsPage() {
   const [email, setEmail] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
+  const [loadError, setLoadError] = useState<string | null>(null);
 
   const fetchAttendants = useCallback(async () => {
     try {
       const data = await listAttendants();
       setAttendants(data);
+      setLoadError(null);
     } catch (err) {
       console.error("Erro ao listar atendentes:", err);
+      setLoadError(err instanceof Error ? err.message : "Erro ao carregar operadores.");
     } finally {
       setLoading(false);
     }
@@ -130,6 +133,8 @@ export default function AttendantsPage() {
               <div className="text-center text-slate-500 py-10 animate-pulse">
                 Carregando operadores...
               </div>
+            ) : loadError ? (
+              <div className="text-center text-red-300 py-10">⚠️ {loadError}</div>
             ) : attendants.length === 0 ? (
               <div className="text-center text-slate-500 py-10">
                 Nenhum atendente cadastrado no banco.

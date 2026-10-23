@@ -95,17 +95,21 @@ export function getSiteContent(): SiteContent {
     const saved = localStorage.getItem(STORAGE_KEY);
     if (!saved) return defaultSiteContent;
 
-    const parsed = JSON.parse(saved) as Partial<SiteContent>;
-    return {
-      brand: { ...defaultSiteContent.brand, ...parsed.brand },
-      hero: { ...defaultSiteContent.hero, ...parsed.hero },
-      about: { ...defaultSiteContent.about, ...parsed.about },
-      contact: { ...defaultSiteContent.contact, ...parsed.contact },
-      services: parsed.services?.length ? parsed.services : defaultSiteContent.services,
-    };
+    return mergeSiteContent(JSON.parse(saved) as Partial<SiteContent>);
   } catch {
     return defaultSiteContent;
   }
+}
+
+/** Completa um conteúdo parcial (localStorage ou API) com os textos padrão. */
+export function mergeSiteContent(parsed: Partial<SiteContent>): SiteContent {
+  return {
+    brand: { ...defaultSiteContent.brand, ...parsed.brand },
+    hero: { ...defaultSiteContent.hero, ...parsed.hero },
+    about: { ...defaultSiteContent.about, ...parsed.about },
+    contact: { ...defaultSiteContent.contact, ...parsed.contact },
+    services: parsed.services?.length ? parsed.services : defaultSiteContent.services,
+  };
 }
 
 export function saveSiteContent(nextContent: SiteContent): void {
