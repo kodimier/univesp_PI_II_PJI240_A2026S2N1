@@ -1,0 +1,30 @@
+name: Frontend tests
+
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+
+jobs:
+  vitest:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - name: Instalar dependências
+        run: npm ci
+      - name: Lint
+        run: npm run lint
+      - name: Rodar vitest
+        run: npm test
+      - name: Build estático
+        run: npm run build
+        env:
+          STATIC_EXPORT: "true"
