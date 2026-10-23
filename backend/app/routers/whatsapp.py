@@ -1,3 +1,6 @@
+import hashlib
+import hmac
+import json
 import os
 from typing import List
 
@@ -44,9 +47,26 @@ def verify_webhook(
     raise HTTPException(status_code=403, detail="Token de verificação inválido.")
 
 
+def _valid_signature(body: bytes, header: str | None) -> bool:
+    """Confere o X-Hub-Signature-256 enviado pela Meta quando WHATSAPP_APP_SECRET existe.
+
+    Sem o segredo no ambiente, o protótipo aceita qualquer chamada (desenvolvimento).
+    """
+    secret = os.getenv("WHATSAPP_APP_SECRET", "").strip()
+    if not secret:
+        return True
+    if not header or not header.startswith("sha256="):
+        return False
+    expected = hmac.new(secret.encode(), body, hashlib.sha256).hexdigest()
+    return hmac.compare_digest(header.removeprefix("sha256="), expected)
+
+
 @router.post("/whatsapp/webhook")
 async def receive_webhook(request: Request):
-    payload = await request.json()
+    body = await request.body()
+    if not _valid_signature(body, request.headers.get("X-Hub-Signature-256")):
+        raise HTTPException(status_code=403, detail="Assinatura do webhook inválida.")
+    payload = json.loads(body)
     processed = 0
     for item in parse_incoming(payload):
         ingest_text_message(item["phone"], item["body"], item["name"], item["wamid"])

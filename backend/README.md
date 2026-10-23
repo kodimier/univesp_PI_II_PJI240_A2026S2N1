@@ -20,6 +20,7 @@ Copie `.env.example` para `.env` e preencha:
 | `CRM_API_TOKEN` | Se preenchido, o painel precisa enviar `X-API-Key` ou `Authorization: Bearer` |
 | `WHATSAPP_VERIFY_TOKEN` | Token de verificação do webhook na Meta |
 | `WHATSAPP_ACCESS_TOKEN` / `WHATSAPP_PHONE_NUMBER_ID` | Envio real pela Cloud API |
+| `WHATSAPP_APP_SECRET` | Chave secreta do app na Meta; quando definida, o webhook exige assinatura `X-Hub-Signature-256` válida |
 
 Rotas públicas: landing (`/api/services`, `/api/assets`, `/api/contact`) e webhook do WhatsApp. Leads, atendentes, CNPJ e a fila do CRM ficam protegidos quando há `CRM_API_TOKEN`.
 
