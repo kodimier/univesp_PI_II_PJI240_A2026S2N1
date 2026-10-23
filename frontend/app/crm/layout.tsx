@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import {
   getActiveAttendantId,
   setActiveAttendantId,
@@ -11,6 +11,9 @@ import {
   setCrmToken,
 } from "@/lib/crm-api";
 import { Attendant } from "@/lib/crm-types";
+import { isMockMode } from "@/lib/mock-mode";
+
+const noopSubscribe = () => () => {};
 
 export default function CrmLayout({
   children,
@@ -26,17 +29,12 @@ export default function CrmLayout({
     () => (typeof window !== "undefined" ? getCrmToken() : "")
   );
   const [showSettings, setShowSettings] = useState(false);
+  const demo = useSyncExternalStore(noopSubscribe, isMockMode, () => false);
 
   useEffect(() => {
     listAttendants()
       .then((data) => setAttendants(data))
-      .catch(() => {
-        setAttendants([
-          { id: "katia", name: "Kátia (Admin)", email: "katia@inovalit.com.br", active: true, created_at: "", updated_at: "" },
-          { id: "atendente-1", name: "Operador 1", email: "op1@inovalit.com.br", active: true, created_at: "", updated_at: "" },
-          { id: "atendente-2", name: "Operador 2", email: "op2@inovalit.com.br", active: true, created_at: "", updated_at: "" },
-        ]);
-      });
+      .catch(() => setAttendants([]));
   }, []);
 
   const handleAttendantChange = (id: string) => {
@@ -146,6 +144,14 @@ export default function CrmLayout({
       </aside>
 
       <main className="flex-1 flex flex-col h-full bg-slate-950 overflow-hidden">
+        {demo && (
+          <div
+            role="status"
+            className="shrink-0 px-4 py-2 bg-[#d7a95a]/15 border-b border-[#d7a95a]/40 text-[#f3d9a8] text-xs text-center"
+          >
+            Modo demonstração: os dados exibidos são fictícios e as alterações não são salvas.
+          </div>
+        )}
         {children}
       </main>
     </div>

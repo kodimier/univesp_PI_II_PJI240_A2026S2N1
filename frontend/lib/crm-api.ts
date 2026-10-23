@@ -16,9 +16,9 @@ import {
   MOCK_LEADS,
   MOCK_MESSAGES,
 } from "./mock-data";
+import { isMockMode, MOCK_FALLBACK } from "./mock-mode";
 
 export const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
-export const USE_MOCKS = process.env.NEXT_PUBLIC_USE_MOCKS === "true";
 
 // Estado em memória/local para manter interatividade no modo Mock
 const mockLeadsState: Lead[] = [...MOCK_LEADS];
@@ -64,10 +64,15 @@ async function request<T>(path: string, options: RequestInit = {}): Promise<T> {
     headers["X-API-Key"] = token;
   }
 
-  const res = await fetch(`${API_URL}${path}`, {
-    ...options,
-    headers,
-  });
+  let res: Response;
+  try {
+    res = await fetch(`${API_URL}${path}`, {
+      ...options,
+      headers,
+    });
+  } catch {
+    throw new Error("Não foi possível conectar ao servidor do CRM.");
+  }
 
   if (!res.ok) {
     let errorDetail = `Erro HTTP ${res.status}`;
@@ -94,10 +99,11 @@ async function request<T>(path: string, options: RequestInit = {}): Promise<T> {
  * @returns {Promise<Conversation[]>} Lista de conversas ordenadas por atualização.
  */
 export const getConversations = async (): Promise<Conversation[]> => {
-  if (USE_MOCKS) return [...mockConversationsState];
+  if (isMockMode()) return [...mockConversationsState];
   try {
     return await request<Conversation[]>("/api/whatsapp/conversations");
   } catch (e) {
+    if (!MOCK_FALLBACK) throw e;
     console.warn("Backend indisponível, usando mock fallback:", e);
     return [...mockConversationsState];
   }
@@ -109,7 +115,7 @@ export const getConversations = async (): Promise<Conversation[]> => {
  * @returns {Promise<Conversation>} Detalhes da conversa.
  */
 export const getConversation = async (conversationId: string): Promise<Conversation> => {
-  if (USE_MOCKS) {
+  if (isMockMode()) {
     const conv = mockConversationsState.find((c) => c.id === conversationId);
     if (!conv) throw new Error("Conversa não encontrada");
     return conv;
@@ -125,10 +131,11 @@ export const getConversation = async (conversationId: string): Promise<Conversat
 export const getConversationMessages = async (
   conversationId: string
 ): Promise<Message[]> => {
-  if (USE_MOCKS) return [...(mockMessagesState[conversationId] || [])];
+  if (isMockMode()) return [...(mockMessagesState[conversationId] || [])];
   try {
     return await request<Message[]>(`/api/whatsapp/conversations/${conversationId}/messages`);
-  } catch {
+  } catch (e) {
+    if (!MOCK_FALLBACK) throw e;
     return [...(mockMessagesState[conversationId] || [])];
   }
 };
@@ -144,7 +151,7 @@ export const claimConversation = async (
   conversationId: string,
   attendantId: string
 ): Promise<Conversation> => {
-  if (USE_MOCKS) {
+  if (isMockMode()) {
     const idx = mockConversationsState.findIndex((c) => c.id === conversationId);
     if (idx !== -1) {
       mockConversationsState[idx] = {
@@ -172,7 +179,7 @@ export const claimConversation = async (
 export const closeConversation = async (
   conversationId: string
 ): Promise<Conversation> => {
-  if (USE_MOCKS) {
+  if (isMockMode()) {
     const idx = mockConversationsState.findIndex((c) => c.id === conversationId);
     if (idx !== -1) {
       mockConversationsState[idx] = {
@@ -199,7 +206,7 @@ export const sendWhatsAppMessage = async (
   conversationId: string,
   body: string
 ): Promise<Message> => {
-  if (USE_MOCKS) {
+  if (isMockMode()) {
     const newMsg: Message = {
       id: `msg-${Date.now()}`,
       conversation_id: conversationId,
@@ -225,7 +232,7 @@ export const listLeads = async (filters?: {
   status?: LeadStatus;
   origin?: LeadOrigin;
 }): Promise<Lead[]> => {
-  if (USE_MOCKS) {
+  if (isMockMode()) {
     let items = [...mockLeadsState];
     if (filters?.status) items = items.filter((i) => i.status === filters.status);
     if (filters?.origin) items = items.filter((i) => i.origin === filters.origin);
@@ -237,13 +244,14 @@ export const listLeads = async (filters?: {
     if (filters?.origin) params.append("origin", filters.origin);
     const query = params.toString() ? `?${params.toString()}` : "";
     return await request<Lead[]>(`/api/leads${query}`);
-  } catch {
+  } catch (e) {
+    if (!MOCK_FALLBACK) throw e;
     return [...mockLeadsState];
   }
 };
 
 export const getLead = async (leadId: string): Promise<Lead> => {
-  if (USE_MOCKS) {
+  if (isMockMode()) {
     const lead = mockLeadsState.find((l) => l.id === leadId);
     if (!lead) throw new Error("Lead não encontrado");
     return lead;
@@ -252,7 +260,7 @@ export const getLead = async (leadId: string): Promise<Lead> => {
 };
 
 export const createLead = async (payload: LeadCreate): Promise<Lead> => {
-  if (USE_MOCKS) {
+  if (isMockMode()) {
     const newLead: Lead = {
       ...payload,
       id: `lead-${Date.now()}`,
@@ -274,7 +282,7 @@ export const updateLeadStatus = async (
   leadId: string,
   status: LeadStatus
 ): Promise<Lead> => {
-  if (USE_MOCKS) {
+  if (isMockMode()) {
     const idx = mockLeadsState.findIndex((l) => l.id === leadId);
     if (idx !== -1) {
       mockLeadsState[idx] = {
@@ -295,10 +303,11 @@ export const updateLeadStatus = async (
 // ==================== Atendentes ====================
 
 export const listAttendants = async (): Promise<Attendant[]> => {
-  if (USE_MOCKS) return [...mockAttendantsState];
+  if (isMockMode()) return [...mockAttendantsState];
   try {
     return await request<Attendant[]>("/api/attendants");
-  } catch {
+  } catch (e) {
+    if (!MOCK_FALLBACK) throw e;
     return [...mockAttendantsState];
   }
 };
@@ -306,7 +315,7 @@ export const listAttendants = async (): Promise<Attendant[]> => {
 export const createAttendant = async (
   payload: AttendantCreate
 ): Promise<Attendant> => {
-  if (USE_MOCKS) {
+  if (isMockMode()) {
     const newAtt: Attendant = {
       ...payload,
       id: `operador-${Date.now()}`,
@@ -324,7 +333,7 @@ export const createAttendant = async (
 };
 
 export const deleteAttendant = async (attendantId: string): Promise<void> => {
-  if (USE_MOCKS) {
+  if (isMockMode()) {
     const index = mockAttendantsState.findIndex((attendant) => attendant.id === attendantId);
     if (index !== -1) {
       mockAttendantsState.splice(index, 1);
@@ -341,7 +350,7 @@ export const deleteAttendant = async (attendantId: string): Promise<void> => {
 
 export const fetchCnpj = async (cnpj: string): Promise<CnpjData> => {
   const clean = cnpj.replace(/\D/g, "");
-  if (USE_MOCKS) {
+  if (isMockMode()) {
     return (
       MOCK_CNPJ_DATA[clean] || {
         cnpj,
