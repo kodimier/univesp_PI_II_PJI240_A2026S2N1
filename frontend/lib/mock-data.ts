@@ -34,7 +34,7 @@ export const MOCK_ASSETS: Asset[] = [
   {
     id: "ast-1",
     name: "Extintor e Mangueira",
-    url: `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/hero.jpg`,
+    url: "/hero.jpg",
     mime_type: "image/jpeg",
     category: "general",
   },

@@ -1,8 +1,11 @@
 name: Deploy frontend
 
 on:
-  # Só manual: o host FTP está atrás da Cloudflare e não aceita conexão na porta 21.
-  # Volta a rodar a cada push na main quando FTP_SERVER apontar para o servidor real.
+  push:
+    branches: [main]
+    paths:
+      - "frontend/**"
+      - ".github/workflows/deploy-frontend.yml"
   workflow_dispatch:
 
 concurrency:
